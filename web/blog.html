@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fifteen years of Minecraft YouTube, in numbers</title>
+<style>
+:root{--ground:#0b0d11;--line:#232833;--line2:#363d4b;--ink:#eceef2;--ink2:#a3abb9;--ink3:#6b7383;--mint:#c9f5d6;--blue:#9cc3ff;--orange:#f0a35e;--pink:#f59ac0;
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 var(--font);-webkit-font-smoothing:antialiased}
+main{max-width:720px;margin:0 auto;padding:56px 22px 120px}
+a{color:inherit;text-decoration-color:var(--ink3);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ink)}
+.top{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3);margin-bottom:44px}
+h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;margin:0 0 14px;font-weight:700}
+.lede{font-size:18px;color:var(--ink2);margin:0 0 8px}
+.by{font-size:13px;color:var(--ink3);margin:0 0 40px}
+h2{font-size:22px;line-height:1.25;letter-spacing:-.01em;margin:64px 0 12px;font-weight:650}
+h2 .n{color:var(--ink3);font-weight:500;margin-right:8px;font-variant-numeric:tabular-nums}
+p{margin:0 0 16px;color:#d4d8df}
+p.small,.note{font-size:13.5px;color:var(--ink2)}
+b{color:var(--ink);font-weight:650}
+.num{font-variant-numeric:tabular-nums}
+figure{margin:22px 0 26px;border:1px solid var(--line);border-radius:10px;padding:16px 18px 12px}
+figcaption{font-size:12.5px;color:var(--ink3);margin-top:6px}
+svg text{fill:var(--ink3);font:11px var(--font)}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink2);margin-top:8px}
+.key i{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.big3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:22px 0}
+.big3>div{background:#0f1217;padding:14px 16px}
+.big3 .v{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.big3 .l{font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.4}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{padding:7px 10px 6px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--ink3);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.09em}
+td .m{color:var(--ink3);font-size:12.5px}
+.words span{display:inline-block;margin:0 10px 2px 0}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.grid figure{margin:0;padding:10px 12px 6px}
+.grid h4{margin:0;font-size:13px;font-weight:650}
+.grid .pk{font-size:11.5px;color:var(--ink3)}
+.ymap{position:relative;max-width:560px;margin:0 auto}
+.ymap img{display:block;width:100%;border-radius:6px}
+.ymap .yr{position:absolute;right:12px;top:6px;font-size:40px;font-weight:700;color:#c9f5d6;opacity:.85;font-variant-numeric:tabular-nums}
+.ymap .lb{position:absolute;transform:translate(-50%,-50%);font-size:11.5px;color:#0b0d11;background:#c9f5d6;border-radius:4px;padding:1px 6px;white-space:nowrap;pointer-events:none}
+.ctl{display:flex;align-items:center;gap:12px;max-width:560px;margin:12px auto 0}
+.ctl input{flex:1;accent-color:#c9f5d6}
+.ctl button{background:#151920;color:var(--ink);border:1px solid var(--line2);border-radius:7px;padding:4px 12px;font:13px var(--font);cursor:pointer;min-width:64px}
+.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.thumbs.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.thumbs img{display:block;width:100%;border-radius:5px}
+.thumbs div{font-size:12px;color:var(--ink2);margin-top:3px;font-variant-numeric:tabular-nums}
+.thumbs.two div{font-size:14px;color:var(--ink)}
+.swr h4{margin:14px 0 0;font-size:13.5px;font-weight:650}
+.swr h4 span{color:var(--ink3);font-weight:400;font-size:12.5px;margin-left:8px}
+.swr svg circle:hover{fill:#fff}
+.cta{display:inline-block;margin-top:8px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;text-decoration:none;font-size:14px}
+.cta:hover{border-color:var(--ink2)}
+.ex{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.ex div{border-left:3px solid var(--orange);padding:2px 0 2px 12px;font-size:14.5px;line-height:1.4}
+.ex div+div{border-color:var(--mint)}
+.ex span{display:block;font-size:12px;color:var(--ink3);margin-top:3px}
+.yt td{padding:5px 10px 4px 0}
+.yt .e{font-size:24px;line-height:1}
+.yt .bn{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.yt .m{display:block;font-size:12px;color:var(--ink3)}
+.yc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border-radius:8px;overflow:hidden}
+.yc>div{background:var(--ground);padding:10px 12px 9px;text-align:center}
+.yc .y{font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.yc .e{font-size:30px;line-height:1.25;margin:2px 0;color:var(--ink2)}
+.yc .bn{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.yc .m{font-size:11.5px;color:var(--ink3);min-height:16px}
+.yc .v{display:inline-block;margin-top:5px;font-size:12px;color:var(--mint);border:1px solid #2f4a3a;border-radius:10px;padding:0 8px;font-variant-numeric:tabular-nums}
+.claim{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:64px 0 0}
+.claim+h2{margin-top:6px}
+details{margin:12px 0 0;border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+details summary{cursor:pointer;font-size:14px;color:var(--ink2)}
+details[open] summary{margin-bottom:10px}
+.pun{font-style:italic;color:var(--ink2)}
+@media (max-width:640px){.yc{grid-template-columns:repeat(2,minmax(0,1fr))}.thumbs{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.big3{grid-template-columns:1fr}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<main id="m"><p class="note">Loading…</p></main>
+<script>
+const $ = s => document.querySelector(s);
+const C = ["#c9f5d6", "#9cc3ff", "#f0a35e", "#f59ac0", "#d8c3ff", "#ffe08a"];
+const pct = (v, d) => v == null ? "–" : (100 * v).toFixed(d ?? (v < 0.1 ? 1 : 0)) + "%";
+const fmt = n => n >= 1e9 ? (n / 1e9).toFixed(1) + "B" : n >= 1e6 ? Math.round(n / 1e6) + "M" : n >= 1e3 ? Math.round(n / 1e3) + "k" : "" + n;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const hhmm = h => { const H = Math.floor(h), M = Math.round((h - H) * 60); return `${((H + 11) % 12) + 1}:${String(M).padStart(2, "0")} ${H < 12 ? "AM" : "PM"}`; };
+const first = a => a.find(v => v != null), last = a => [...a].reverse().find(v => v != null);
+const peak = (Y, a) => { let i = 0; a.forEach((v, j) => { if (v != null && v > (a[i] ?? -1)) i = j; }); return [Y[i], a[i]]; };
+
+// a line chart; series = [{n, v, c}]
+function lines(Y, series, f, opt = {}) {
+  const w = 680, h = opt.h || 220, l = 46, b = 22, t = 10;
+  const all = series.flatMap(s => s.v).filter(v => v != null), hi = opt.hi ?? Math.max(...all), lo = opt.lo ?? 0;
+  const X_ = i => l + i / (Y.length - 1) * (w - l - 8), Y_ = v => t + (h - t - b) * (1 - (v - lo) / Math.max(1e-9, hi - lo));
+  const g = [0, .5, 1].map(q => lo + q * (hi - lo)).map(v => `<line x1="${l}" x2="${w - 8}" y1="${Y_(v)}" y2="${Y_(v)}" stroke="#1c212b"/><text x="${l - 8}" y="${Y_(v) + 4}" text-anchor="end">${f(v)}</text>`).join("");
+  const ln = series.map(s => {
+    const pts = s.v.map((v, i) => v == null ? null : `${X_(i).toFixed(1)},${Y_(v).toFixed(1)}`).filter(Boolean).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${s.c}" stroke-width="${s.w || 2.2}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }).join("");
+  const step = Y.length > 12 ? 3 : 1;
+  const xl = Y.map((y, i) => (i % step === 0 || i === Y.length - 1) ? `<text x="${X_(i)}" y="${h - 5}" text-anchor="${i === Y.length - 1 ? "end" : "middle"}">${y}</text>` : "").join("");
+  const key = series.length > 1 ? `<div class="key">${series.map(s => `<span><i style="background:${s.c}"></i>${esc(s.n)}</span>`).join("")}</div>` : "";
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${g}${ln}${xl}</svg>${key}`;
+}
+function bars(Y, v, f, c = C[1], hl = null) {
+  const w = 680, h = 180, l = 46, b = 22, t = 10, hi = Math.max(...v), bw = (w - l - 8) / v.length;
+  const r = v.map((x, i) => `<rect x="${l + i * bw + 2}" y="${t + (h - t - b) * (1 - x / hi)}" width="${bw - 4}" height="${(h - t - b) * x / hi}" rx="2" fill="${hl && hl.includes(Y[i]) ? C[0] : c}"/>`).join("");
+  const xl = Y.map((y, i) => i % 3 === 0 || i === Y.length - 1 ? `<text x="${l + i * bw + bw / 2}" y="${h - 5}" text-anchor="middle">${y}</text>` : "").join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%"><text x="${l - 8}" y="${t + 4}" text-anchor="end">${f(hi)}</text><text x="${l - 8}" y="${h - b + 4}" text-anchor="end">0</text>${r}${xl}</svg>`;
+}
+// topics x years: each row scaled to its own peak
+function heat(Y, topics) {
+  const w = 680, rh = 15, l = 250, top = 4, h = top + topics.length * rh + 22, cw = (w - l - 4) / Y.length;
+  const rows = topics.map((t, j) => {
+    const m = Math.max(...t.share);
+    const cells = t.share.map((v, i) => `<rect x="${l + i * cw + 1}" y="${top + j * rh + 1}" width="${cw - 2}" height="${rh - 2}" rx="2" fill="#c9f5d6" fill-opacity="${(0.04 + 0.96 * Math.pow(v / m, 1.3)).toFixed(3)}"><title>${esc(t.name)} ${Y[i]}: ${pct(v)} of uploads</title></rect>`).join("");
+    return `<text x="${l - 8}" y="${top + j * rh + 11}" text-anchor="end" style="fill:var(--ink2)">${esc(t.name.length > 38 ? t.name.slice(0, 36) + "…" : t.name)}</text>${cells}`;
+  }).join("");
+  const xl = Y.map((y, i) => i % 3 === 0 || i === Y.length - 1 ? `<text x="${l + i * cw + cw / 2}" y="${h - 6}" text-anchor="middle">${y}</text>` : "").join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${rows}${xl}</svg>`;
+}
+function scatter(pts, eras) {
+  const w = 680, h = 240, l = 46, b = 22, t = 10, x0 = 2010.5, x1 = 2026.8, hi = Math.min(36, Math.max(...pts.map(p => p.months)));
+  const X_ = x => l + (x - x0) / (x1 - x0) * (w - l - 8), Y_ = v => t + (h - t - b) * (1 - Math.min(v, hi) / hi);
+  const d = pts.map(p => `<circle cx="${X_(p.peak).toFixed(1)}" cy="${Y_(p.months).toFixed(1)}" r="${(2.5 + Math.sqrt(p.n) / 22).toFixed(1)}" fill="${p.ongoing ? "none" : "#9cc3ff"}" fill-opacity=".55" stroke="#9cc3ff" stroke-opacity=".8"><title>${esc(p.name)}: about ${p.months} months near its peak${p.ongoing ? " (still going)" : ""}</title></circle>`).join("");
+  const m = eras.map(e => `<line x1="${X_(e.a)}" x2="${X_(e.b)}" y1="${Y_(e.med)}" y2="${Y_(e.med)}" stroke="#c9f5d6" stroke-width="2.5"/><text x="${X_((e.a + e.b) / 2)}" y="${Y_(e.med) - 7}" text-anchor="middle" style="fill:#c9f5d6">${e.med} months</text>`).join("");
+  const xl = [2011, 2014, 2017, 2020, 2023, 2026].map(y => `<text x="${X_(y)}" y="${h - 5}" text-anchor="middle">${y}</text>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%"><text x="${l - 8}" y="${t + 4}" text-anchor="end">${hi} mo</text><text x="${l - 8}" y="${h - b + 4}" text-anchor="end">0</text><line x1="${l}" x2="${w - 8}" y1="${h - b}" y2="${h - b}" stroke="#2c3340"/>${m}${d}${xl}</svg>`;
+}
+function mini(Y, v, c) {
+  const w = 160, h = 56, hi = Math.max(...v), X_ = i => 2 + i / (Y.length - 1) * (w - 4), Y_ = x => 4 + (h - 8) * (1 - x / hi);
+  const pts = v.map((x, i) => `${X_(i).toFixed(1)},${Y_(x).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%"><polygon points="${X_(0)},${h - 4} ${pts} ${X_(v.length - 1)},${h - 4}" fill="${c}" fill-opacity=".14"/><polyline points="${pts}" fill="none" stroke="${c}" stroke-width="1.8"/></svg>`;
+}
+
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const mname = m => `${MON[m % 12]} ${2011 + Math.floor(m / 12)}`;  // months since Jan 2011
+// how a trend spread: a dot per channel at the quarter it joined (its 2nd video in the topic), over the topic's monthly share
+function swarm(T) {
+  const w = 680, l = 4, M = 16 * 12, X_ = m => l + m / M * (w - l - 8), qw = X_(3) - X_(0), d = 4.4, cols = 2;
+  const grid = [0, 3, 6, 9, 12, 15].map(k => `<line x1="${X_(k * 12)}" x2="${X_(k * 12)}" y1="0" y2="100%" stroke="#161a21"/>`).join("");
+  const rows = T.map(t => {
+    const q = {}, dots = t.dots.map(o => { const b = Math.floor(o.m / 3), k = q[b] = (q[b] || 0) + 1; return {...o, b, k: k - 1}; });
+    const tall = Math.max(...Object.values(q)), h = Math.max(46, Math.ceil(tall / cols) * d + 12), base = h - 4;
+    const mx = Math.max(...t.share), area = t.share.map((v, i) => `${X_(i + .5).toFixed(1)},${(base - v / mx * (h - 10)).toFixed(1)}`).join(" ");
+    const c = dots.map(o => `<circle cx="${(X_(o.b * 3) + qw / 2 + (o.k % cols - (cols - 1) / 2) * d).toFixed(1)}" cy="${(base - 3 - Math.floor(o.k / cols) * d).toFixed(1)}" r="1.9" fill="#c9f5d6"><title>${esc(o.ch)}: joined in ${mname(o.m)} (${o.n} videos)</title></circle>`).join("");
+    const ms = t.dots.map(o => o.m), half = ms[Math.floor(ms.length / 2)];
+    const big = Object.entries(q).sort((a, b) => b[1] - a[1])[0];
+    return `<h4>${esc(t.name)}<span>${t.dots.length} channels · half had joined by ${mname(half)}</span></h4>
+      <svg viewBox="0 0 ${w} ${h}" width="100%">${grid}<polygon points="${X_(0)},${base} ${area} ${X_(M)},${base}" fill="#9cc3ff" fill-opacity=".13"/><polyline points="${area}" fill="none" stroke="#9cc3ff" stroke-opacity=".5" stroke-width="1.2"/>${c}<line x1="${l}" x2="${w - 8}" y1="${base}" y2="${base}" stroke="#2c3340"/></svg>`;
+  }).join("");
+  const ax = `<svg viewBox="0 0 ${w} 16" width="100%">${[0, 3, 6, 9, 12, 15].map(k => `<text x="${X_(k * 12)}" y="12" text-anchor="${k ? "middle" : "start"}">${2011 + k}</text>`).join("")}</svg>`;
+  return `<div class="swr">${rows}${ax}</div>`;
+}
+// every year's length mix as a ridge, long videos and Shorts drawn apart, all on one height scale
+function ridge(L, Y) {
+  const w = 680, l = 46, rh = 24, top = 60, e = L.edges, nb = e.length - 1, lo = Math.log(e[0]), hi = Math.log(e[nb]);
+  const X_ = s => l + (Math.log(s) - lo) / (hi - lo) * (w - l - 8), h = top + Y.length * rh + 22;
+  const tot = Y.map((_, i) => L.long[i].reduce((a, b) => a + b, 0) + L.short[i].reduce((a, b) => a + b, 0));
+  const peakLong = Math.max(...Y.flatMap((_, i) => L.long[i].map(v => v / tot[i]))), k = 2.4 * rh / peakLong, cap = 3.2 * rh;
+  const path = (a, i) => {
+    const b = top + (i + 1) * rh, pts = a.map((v, j) => `${X_(Math.sqrt(e[j] * e[j + 1])).toFixed(1)},${Math.max(b - v / tot[i] * k, b - cap).toFixed(1)}`);
+    return `M${X_(e[0])},${b} L${pts.join(" L")} L${X_(e[nb])},${b} Z`;
+  };
+  const rows = Y.map((y, i) => `<path d="${path(L.long[i], i)}" fill="#0b0d11"/><path d="${path(L.long[i], i)}" fill="#c9f5d6" fill-opacity=".16" stroke="#c9f5d6" stroke-width="1.3"/>` +
+    (L.short[i].some(v => v) ? `<path d="${path(L.short[i], i)}" fill="#9cc3ff" fill-opacity=".22" stroke="#9cc3ff" stroke-width="1.3"/>` : "") +
+    `<text x="${l - 8}" y="${top + (i + 1) * rh - 3}" text-anchor="end">${y}</text>`).join("");
+  const T = [[15, "15s"], [60, "1 min"], [300, "5 min"], [1200, "20 min"], [3600, "1 h"], [3 * 3600, "3 h"]];
+  const ax = T.map(([s, t]) => `<line x1="${X_(s)}" x2="${X_(s)}" y1="${top - 30}" y2="${h - 18}" stroke="#161a21"/><text x="${X_(s)}" y="${h - 5}" text-anchor="middle">${t}</text>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${ax}${rows}</svg>`;
+}
+
+const t0 = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+// long videos per 5-second length bin, one row per era, with the 8:00 and 10:00 ad lines
+function adhist(ab) {
+  const w = 680, l = 74, rh = 92, gap = 18, top = 22, rows = Object.entries(ab.eras), h = top + rows.length * (rh + gap) + 8, B = ab.bins;
+  const X_ = s => l + (s - 300) / 420 * (w - l - 8), bw = X_(305) - X_(300), cols = [C[2], C[0]];
+  const marks = [[480, "8:00"], [600, "10:00"]].map(([s, t]) => `<line x1="${X_(s)}" x2="${X_(s)}" y1="${top - 6}" y2="${h - 22}" stroke="#6b7383" stroke-dasharray="3 3"/><text x="${X_(s)}" y="${top - 10}" text-anchor="middle" style="fill:var(--ink2)">${t}</text>`).join("");
+  const r = rows.map(([name, v], j) => {
+    const b = top + j * (rh + gap) + rh, hi = Math.max(...v);
+    return `<text x="${l - 10}" y="${b - rh + 14}" text-anchor="end" style="fill:${cols[j]}">${name}</text>` +
+      v.map((x, i) => `<rect x="${(X_(B[i]) + .5).toFixed(1)}" y="${(b - x / hi * rh).toFixed(1)}" width="${(bw - 1).toFixed(1)}" height="${(x / hi * rh).toFixed(1)}" fill="${cols[j]}"><title>${t0(B[i])}–${t0(B[i] + 4)}: ${pct(x, 2)} of long videos</title></rect>`).join("") +
+      `<line x1="${l}" x2="${w - 8}" y1="${b}" y2="${b}" stroke="#2c3340"/>`;
+  }).join("");
+  const xl = [300, 360, 420, 480, 540, 600, 660, 720].map(s => `<text x="${X_(s)}" y="${h - 6}" text-anchor="middle">${t0(s)}</text>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${marks}${r}${xl}</svg>`;
+}
+// new mobs: monthly title mentions from 2019, with the month it was shown and the month you could play it
+const MOBD = {Piglin: [8, 17], Axolotl: [21, 29], Warden: [21, 41], Allay: [33, 41], Sniffer: [45, 53], Camel: [45, 53], Armadillo: [57, 63], Breeze: [57, 65], Creaking: [68, 71], "Happy ghast": [74, 77]};
+function mobs(F) {
+  const ks = Object.keys(MOBD), M = F.mobs.Piglin.count.length, w = 680, l = 86, rh = 28, top = 4, h = top + ks.length * rh + 22;
+  const X_ = m => l + m / M * (w - l - 8), bw = X_(1) - X_(0);
+  const yl = [0, 1, 2, 3, 4, 5, 6, 7].map(k => `<line x1="${X_(k * 12)}" x2="${X_(k * 12)}" y1="0" y2="${h - 18}" stroke="#161a21"/><text x="${X_(k * 12)}" y="${h - 5}" text-anchor="${k ? "middle" : "start"}">${2019 + k}</text>`).join("");
+  const r = ks.map((k, j) => {
+    const c = F.mobs[k].count, hi = Math.max(...c), b = top + (j + 1) * rh - 3, [an, out] = MOBD[k];
+    return `<text x="${l - 10}" y="${b - 4}" text-anchor="end" style="fill:var(--ink2)">${k}</text>` +
+      `<rect x="${X_(an)}" y="${b - rh + 5}" width="${X_(out) - X_(an)}" height="${rh - 5}" fill="#9cc3ff" fill-opacity=".07"/>` +
+      c.map((x, i) => x ? `<rect x="${(X_(i) + .4).toFixed(1)}" y="${(b - x / hi * (rh - 6)).toFixed(1)}" width="${(bw - .8).toFixed(1)}" height="${(x / hi * (rh - 6)).toFixed(1)}" fill="#c9f5d6"><title>${k}, ${MON[i % 12]} ${2019 + Math.floor(i / 12)}: ${x} titles</title></rect>` : "").join("") +
+      `<line x1="${X_(an)}" x2="${X_(an)}" y1="${b - rh + 5}" y2="${b}" stroke="#9cc3ff" stroke-width="2"/><line x1="${X_(out + 1)}" x2="${X_(out + 1)}" y1="${b - rh + 5}" y2="${b}" stroke="#f0a35e" stroke-width="2"/>` +
+      `<line x1="${l}" x2="${w - 8}" y1="${b}" y2="${b}" stroke="#2c3340"/>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${yl}${r}</svg><div class="key"><span><i style="background:#9cc3ff"></i>Mojang shows it</span><span><i style="background:#f0a35e"></i>You can play it</span><span><i style="background:#c9f5d6"></i>Titles that month (each row its own scale)</span></div>`;
+}
+// share of uploads per weekday, two years side by side
+function week(F, a, b) {
+  const D = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], A = F.weekday[a], B = F.weekday[b], w = 680, h = 170, l = 10, t = 18, bt = 22;
+  const hi = Math.max(...A, ...B), gw = (w - l * 2) / 7, bw = gw * .32, Y_ = v => t + (h - t - bt) * (1 - v / hi);
+  const r = D.map((d, i) => {
+    const x = l + i * gw + gw / 2;
+    return [[A[i], C[2], -bw - 1], [B[i], C[0], 1]].map(([v, c, o]) => `<rect x="${x + o}" y="${Y_(v)}" width="${bw}" height="${h - bt - Y_(v)}" rx="2" fill="${c}"/><text x="${x + o + bw / 2}" y="${Y_(v) - 4}" text-anchor="middle">${(100 * v).toFixed(0)}%</text>`).join("") +
+      `<text x="${x}" y="${h - 5}" text-anchor="middle" style="fill:${d === "Sat" ? "var(--ink)" : "var(--ink3)"}">${d}</text>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${r}</svg><div class="key"><span><i style="background:${C[2]}"></i>${a}</span><span><i style="background:${C[0]}"></i>${b}</span></div>`;
+}
+const NUMTXT = {xbox: n => `Xbox ${n}`, top: n => `Top ${n}`, hermitcraft: n => `Hermitcraft ${n}`, survived: n => `I survived ${n} days`, episode: n => `Episode ${n}`};
+Promise.all(["data/stats.json", "data/insights.json", "data/analysis.json", "data/meta.json", "data/viz.json", "data/finds.json"].map(u => fetch(u).then(r => r.json()))).then(([S, I, A, M, V, F]) => {
+  const Y = S.years, iy = y => Y.indexOf(y);
+  const Yi = I.years;
+  const shorts26 = last(I.conc.shorts), shortsV26 = last(I.conc.shorts_views);
+  const looks = Object.fromEntries(A.looks.map(l => [l.key, l]));
+  const raw = looks.raw_gameplay, art = looks.cartoon, two = looks.two_sides;
+  const L = S.lifespan_by_era, eras = Object.entries(L).map(([k, v]) => { const [a, b] = k.split("–").map(Number); return {a, b: b + 1, med: v.median, n: v.n}; });
+  const [capY, capV] = peak(Yi, I.style.caps);
+  const tv = S.top_video;
+  const ab = tv.filter(t => t.channel === "Alan Becker").length, gc = tv.filter(t => t.channel === "GarrettTheCarrot").length;
+  const KW = ["Hunger Games", "Mods", "Hypixel", "Hardcore", "100 days", "Noob vs Pro", "Speedrun", "Skyblock"];
+  const h12 = S.hours_hist["2012"], h25 = S.hours_hist["2025"], norm = a => { const s = a.reduce((x, y) => x + y, 0); return a.map(v => v / s); };
+  const nTot = S.n, nVid = M.n, nCh = M.channels.length;
+  const ad = F.adbreak, sh = F.shapes, ev = F.versions;
+  const [o10Y, o10V] = peak(Y, ad.over10), [o8Y, o8V] = peak(Y, ad.over8);
+  const cross = Y.find((y, i) => sh.ends[i] > sh.starts[i]);
+  const [colY, colV] = peak(Y, sh.collab), [iY, iV] = peak(Y, sh.i);
+  const [chY, chV] = peak(Y, sh.chars);
+  const vs = Y.map(y => ev[y].share), [vY, vV] = peak(Y, vs);
+  const sat = Y.map(y => F.weekday[y][5]), satRank = y => [...F.weekday[y]].sort((a, b) => b - a).indexOf(F.weekday[y][5]) + 1;
+  const hero = S.keywords.Herobrine, [heY, heV] = peak(Y, hero);
+  const d100 = V.spread.find(t => t.id === 75), q100 = Math.max(...Object.values(d100.dots.reduce((q, o) => (q[Math.floor(o.m / 3)] = (q[Math.floor(o.m / 3)] || 0) + 1, q), {})));
+  let sec = 0; const N = () => ++sec;
+
+  $("#m").innerHTML = `
+  <div class="top"><a href="/">← Back to the map</a><span>${Y[0]}–${Y[Y.length - 1]} · ${fmt(nVid)} videos</span></div>
+  <h1>I counted things in half a million Minecraft videos</h1>
+  <p class="lede">I grabbed the title, thumbnail and length of every video from ${nCh} Minecraft channels. That's ${nVid.toLocaleString()} videos, going back to 2011. Then I counted stuff. Some of it is about Minecraft. A lot of it is about YouTube.</p>
+  <p class="lede">Let's start with the dumbest one.</p>
+  <p class="by">From the Minecraft YouTube map · October 2026</p>
+
+  <h2><span class="n">${N()}</span>Videos are exactly as long as YouTube pays for</h2>
+  <p>Here's how many long videos land on each length between 5 and 12 minutes, in 5-second steps.</p>
+  <figure>${adhist(ad)}<figcaption>Share of long videos in each 5-second bin. Each row has its own scale.</figcaption></figure>
+  <p>Before 2020 there's a wall right at 10:00. After 2020 the wall is at 8:00. Up until mid-2020, YouTube only let you put ads in the middle of a video if it ran at least 10 minutes. Then it lowered that to 8. Within a year, the wall had moved too, down to the second.</p>
+  <figure>${lines(Y, [{n: "Just over 10:00, vs just under", v: ad.over10, c: C[2]}, {n: "Just over 8:00, vs just under", v: ad.over8, c: C[0]}], v => v.toFixed(0) + "×")}<figcaption>How many more videos run 30 seconds past the line than 30 seconds short of it.</figcaption></figure>
+  <p>In ${o8Y}, a video was <b>${o8V.toFixed(0)} times</b> more likely to run 8:00 to 8:29 than 7:30 to 7:59.</p>
+  <p class="pun">Funny how many stories happen to end right at 8:01.</p>
+
+  <h2><span class="n">${N()}</span>Every year had its thing</h2>
+  <p>This is the map, with one year lit up at a time. Hit play.</p>
+  <figure><div class="ymap" id="ymap"><img id="ymimg" alt="The map with one year lit up"><div class="yr" id="ymyr"></div><div id="ymlb"></div></div>
+    <div class="ctl"><button id="ymplay">Play</button><input type="range" id="ymr" min="${Y[0]}" max="${Y[Y.length - 1]}" value="${Y[0]}"></div>
+    <figcaption>Grey is every video ever. Green is 12,000 random videos from one year. Labels are that year's biggest topics.</figcaption></figure>
+  <p>Here's the same thing as a chart: puzzle maps and Mindcrack, then Hunger Games, then Bed Wars and "UHC, but…", then 100 days, then whatever Shorts are doing.</p>
+  <figure>${heat(Y, S.river.topics)}<figcaption>Each year's three biggest topics. Each row is scaled to its own best year.</figcaption></figure>
+
+  <h2><span class="n">${N()}</span>The average thumbnail</h2>
+  <p>I stacked 3,000 thumbnails from each year on top of each other and averaged them.</p>
+  <figure><div class="thumbs two">${[Y[0], 2025].map(y => `<div><img src="img/avg_${y}.jpg" alt="Average thumbnail of ${y}">${y}</div>`).join("")}</div>
+    <div class="thumbs">${Y.map(y => `<div><img src="img/avg_${y}.jpg" alt="Average thumbnail of ${y}" loading="lazy">${y}</div>`).join("")}</div>
+    <figcaption>Pixel average of 3,000 random long-video thumbnails per year, contrast turned up.</figcaption></figure>
+  <p>In 2011 you can still read MINECRAFT, twice, and the hotbar along the bottom. That's a raw screenshot. By 2025 it's blue sky, green grass, and four boxes that say NOOB, PRO, HACKER and GOD. So many videos used that exact layout that it survives the averaging.</p>
+  <figure>${lines(Y, [{n: "Plain gameplay screenshot", v: raw.long, c: C[2]}, {n: "Drawn or animated art", v: art.long, c: C[0]}, {n: "Split or versus layout", v: two.long, c: C[1]}], v => pct(v, 0))}<figcaption>Share of long-video thumbnails, as labelled by a vision model.</figcaption></figure>
+
+  <h2><span class="n">${N()}</span>"Minecraft" moved to the end of the title</h2>
+  <div class="ex"><div>${esc(F.shape_examples["2012"])}<span>2012</span></div><div>${esc(F.shape_examples["2025"])}<span>2025</span></div></div>
+  <figure>${lines(Y, [{n: 'Starts with "Minecraft:" or "Minecraft |"', v: sh.starts, c: C[2]}, {n: 'Ends with "in Minecraft"', v: sh.ends, c: C[0]}], v => pct(v, 0))}</figure>
+  <p>In 2011, ${pct(sh.starts[0])} of titles opened with the game's name, like a label. By ${cross} more titles ended with it. Minecraft went from what the video is to where the video happens.</p>
+
+  <h2><span class="n">${N()}</span>The emoji, number and version of every year</h2>
+  <p>The most common emoji, number and Minecraft version in each year's titles.</p>
+  <figure><div class="yc">${Y.map(y => {
+    const e = F.emoji[y][0], n = F.numbers[y][0][0], c = (F.number_context[y][0] || [])[0], v = ev[y].top, ok = e && e[1] >= 20;
+    return `<div><div class="y">${y}</div><div class="e" title="${ok ? e[1].toLocaleString() + " titles" : "hardly any emoji yet"}">${ok ? e[0] : "·"}</div><div class="bn">${n}</div><div class="m">${NUMTXT[c] ? esc(NUMTXT[c](n)) : ""}</div><div class="v">${v ? "1." + v : ""}</div></div>`;
+  }).join("")}</div><figcaption>Per year: top emoji, top number (with what it's usually attached to), top 1.X version. "·" means almost no emoji yet.</figcaption></figure>
+  <p>The numbers are basically a history. Xbox 360, then top 10 lists, then Hermitcraft seasons, then surviving 100 days. The emoji go ★ to ✔ to 💀.</p>
+  <p>And version numbers are dying. In ${vY}, ${pct(vV)} of titles named one. In ${Y[Y.length - 1]}, ${pct(last(vs))}. Mojang stopped shipping big numbered updates and started shipping smaller "drops", so there's no 1.22 to get hyped about.</p>
+
+  <h2><span class="n">${N()}</span>Mobs get famous the day they're announced</h2>
+  <figure>${mobs(F)}</figure>
+  <p>Every new mob since 2019 starts showing up in titles the month Mojang shows it off, not the month you can actually play it. The Warden got ${F.mobs.Warden.count[21]} titles the month it was revealed, then waited 20 months.</p>
+
+  <h2><span class="n">${N()}</span>Shorts ate everything</h2>
+  <figure>${lines(Yi.slice(Yi.indexOf(2019)), [{n: "Share of uploads that are Shorts", v: I.conc.shorts.slice(Yi.indexOf(2019)), c: C[0]}, {n: "Share of views that go to Shorts", v: I.conc.shorts_views.slice(Yi.indexOf(2019)), c: C[1]}], v => pct(v, 0), {hi: 1})}</figure>
+  <p>Shorts showed up in 2021. This year they're <b>${pct(shorts26)}</b> of uploads and <b>${pct(shortsV26)}</b> of views. Here's the most-watched video of each year:</p>
+  <figure><table><tr><th>Year</th><th>Most-watched video</th><th>Views</th></tr>${tv.map(t => `<tr><td class="num">${t.year}</td><td><a href="https://www.youtube.com/watch?v=${t.id}" target="_blank" rel="noopener">${esc(t.title)}</a><div class="m">${esc(t.channel)}${t.short ? " · Short" : ""}</div></td><td class="num">${fmt(t.views)}</td></tr>`).join("")}</table></figure>
+  <p>Song parodies, then Alan Becker (${ab} years), then GarrettTheCarrot (${gc} years).</p>
+
+  <h2><span class="n">${N()}</span>And long videos got longer</h2>
+  <figure>${ridge(V.lengths, Y)}<figcaption>Each row is a year. Green is long videos, blue is Shorts. Length on a log scale, blue spikes clipped.</figcaption></figure>
+  <p>For ten years the green hump sits at 10 to 20 minutes. Then the blue spike shows up under a minute, and the green gets flatter and stretches out past 40. The quick stuff moved to Shorts. What's left is the sit-down stuff.</p>
+
+  <h2><span class="n">${N()}</span>How a trend spreads</h2>
+  <p>Each dot is a channel, placed at the month it made its second video on that trend. The blue behind it is how big the trend was.</p>
+  <figure>${swarm(V.spread)}<figcaption>Hover a dot to see the channel.</figcaption></figure>
+  <p>Logdotzip did a 100 days video in October 2018. Basically nobody followed for two years. Then in early 2021, ${q100} channels jumped in within three months.</p>
+
+  <p class="claim">Everyone says: trends move faster now</p>
+  <h2><span class="n">${N()}</span>Actually, they got slower</h2>
+  <figure>${scatter(S.lifespans, eras)}<figcaption>Each dot is a topic, at its peak, by how many months it stayed above half its best share. Hollow dots are still going.</figcaption></figure>
+  <p>A topic that peaked before 2015 stayed hot for about <b>${eras[0].med} months</b>. After 2020, about <b>${eras[2].med}</b>. There are just a lot more channels for a trend to burn through.</p>
+
+  <h2><span class="n">${N()}</span>Most words get one big year</h2>
+  <div class="grid">${KW.map((k, j) => { const [py, pv] = peak(Y, S.keywords[k]); return `<figure><h4>${esc(k)}</h4><div class="pk">peak ${py}, ${pct(pv)} of titles</div>${mini(Y, S.keywords[k], C[j % 4])}</figure>`; }).join("")}</div>
+  <p class="small" style="margin-top:10px">Share of each year's titles with the word, ${Y[0]}–${Y[Y.length - 1]}. Each chart has its own scale.</p>
+  <details><summary>The words that came out of nowhere, every year</summary>
+    <table>${S.words.map(w => `<tr><td class="num" style="width:56px">${w.year}</td><td class="words">${w.words.map(x => `<span>${esc(x.w)}</span>`).join("")}</td></tr>`).join("")}</table>
+    <p class="small" style="margin-top:10px">Words and phrases used far more than in the two years before, by at least 5 channels.</p></details>
+
+  <h2><span class="n">${N()}</span>From "w/ friends" to "I"</h2>
+  <figure>${lines(Y, [{n: 'Has "w/", "ft." or "with"', v: sh.collab, c: C[2]}, {n: 'Has the word "I"', v: sh.i, c: C[0]}], v => pct(v, 0))}</figure>
+  <p>In ${colY}, ${pct(colV)} of titles were a collab, like "Minecraft: Hunger Games w/Mitch! Game 172 - GIANT!" In ${iY}, ${pct(iV)} had the word "I" in them. I survived, I built, I became.</p>
+
+  <h2><span class="n">${N()}</span>Titles got shorter and quieter</h2>
+  <figure>${lines(Y, [{n: "Mostly CAPITAL LETTERS", v: I.style.caps, c: C[2]}, {n: "all lowercase", v: sh.lower, c: C[1]}, {n: "Has an emoji", v: sh.emoji, c: C[3]}], v => pct(v, 0))}</figure>
+  <p>CAPS peaked in ${capY} at ${pct(capV)}. All-lowercase titles basically didn't exist until 2021, and now they're ${pct(last(sh.lower))}. The median title went from ${chV} characters in ${chY} to ${last(sh.chars)}.</p>
+
+  <h2><span class="n">${N()}</span>Saturday won</h2>
+  <figure>${week(F, 2011, 2025)}<figcaption>Share of uploads by weekday, US Pacific time.</figcaption></figure>
+  <p>In 2011 Saturday was the ${["", "busiest", "second-busiest", "third-busiest", "fourth-busiest", "third-slowest", "second-slowest", "slowest"][satRank(2011)]} day to upload. Now it's the busiest by a mile. Uploads also moved from about ${hhmm(Math.round(S.hour[0]))} to ${hhmm(Math.round(last(S.hour)))} Pacific, which is lunch in New York and dinner in London.</p>
+  <figure>${lines([..."x".repeat(24)].map((_, i) => i % 6 === 0 ? (i ? (i < 12 ? i + "am" : i === 12 ? "12pm" : (i - 12) + "pm") : "12am") : ""), [{n: "2012", v: norm(h12), c: C[2]}, {n: "2025", v: norm(h25), c: C[0]}], v => pct(v, 0))}<figcaption>Share of uploads by hour, US Pacific time.</figcaption></figure>
+
+  <h2><span class="n">${N()}</span>The big channels lost their grip</h2>
+  <figure>${bars(Y, S.new_channels, v => v, C[1], [2020, 2021])}<figcaption>Channels posting 5+ Minecraft videos for the first time, per year.</figcaption></figure>
+  <p>In 2011 the top 10 channels got ${pct(I.conc.top10_views[0])} of all views. Now it's ${pct(last(I.conc.top10_views))}. Most of the new competition showed up in 2020 and 2021. You can probably guess why.</p>
+
+  <h2><span class="n">${N()}</span>One more thing</h2>
+  <p>Mojang has been "removing Herobrine" in patch notes since 2011. Here's how that's going.</p>
+  <figure>${lines(Y, [{n: "Titles with Herobrine", v: hero, c: C[3]}], v => pct(v, 1))}<figcaption>Share of each year's titles that mention Herobrine.</figcaption></figure>
+  <p>His best year wasn't 2011. It was <b>${heY}</b>.</p>
+  <p class="pun">Keep trying, Mojang.</p>
+
+  <details style="margin-top:56px"><summary>How this was made, and what's wrong with it</summary>
+  <p class="small">This dataset isn't perfect. The channels are ${nCh} English-speaking Minecraft channels people know today, starting from the 281 in vindalol's community map plus searches. Channels that quit early are missing, and small channels are way under-counted. I pulled every upload with the YouTube API, ${nVid.toLocaleString()} videos, and kept the ${nTot.toLocaleString()} a model tagged as actually Minecraft.</p>
+  <p class="small">Titles were turned into numbers with OpenAI's text-embedding-3-small. UMAP flattened them into a map and HDBSCAN found the topics, which I named by hand. Thumbnail styles: Gemini 3.8 Flash labelled ${A.looks_labelled.toLocaleString()} random thumbnails and a small model scored the rest (it ranks screenshots right ${pct(raw.auc)} of the time on ones it never saw). Views are as of October 2026, so old videos have had longer to collect them. Mob dates are when Mojang revealed and released each one. Everything else is counting.</p>
+  </details>
+  <p style="margin-top:28px"><a class="cta" href="/">Explore the map yourself →</a></p>`;
+  Y.forEach(y => { new Image().src = `img/map_${y}.png`; });
+  const top3 = Object.fromEntries(A.topics_by_year.map(t => [t.year, t.made.map(m => m.id)]));
+  const show = y => {
+    $("#ymimg").src = `img/map_${y}.png`; $("#ymyr").textContent = y; $("#ymr").value = y;
+    $("#ymlb").innerHTML = (top3[y] || []).map(id => V.map_labels[id]).filter(Boolean)
+      .map((p, i, a) => { let y = p.y; a.slice(0, i).forEach(q => { if (Math.abs(q.x - p.x) < .25 && Math.abs(q.y - y) < .045) y = q.y + .05; }); return {...p, y}; })
+      .map(p => `<div class="lb" style="left:${p.x * 100}%;top:${p.y * 100}%">${esc(p.name)}</div>`).join("");
+  };
+  let timer = null;
+  const stop = () => { clearInterval(timer); timer = null; $("#ymplay").textContent = "Play"; };
+  $("#ymr").oninput = e => { stop(); show(+e.target.value); };
+  $("#ymplay").onclick = () => {
+    if (timer) return stop();
+    let y = +$("#ymr").value; if (y >= Y[Y.length - 1]) y = Y[0] - 1;
+    $("#ymplay").textContent = "Pause";
+    timer = setInterval(() => { y++; show(y); if (y >= Y[Y.length - 1]) stop(); }, 900);
+  };
+  show(Y[0]);
+}).catch(e => { $("#m").innerHTML = `<p class="note">Couldn't load the numbers: ${esc(e)}</p>`; });
+</script>
+</body>
+</html>
