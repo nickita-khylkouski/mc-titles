@@ -56,7 +56,7 @@ web/           the map (index.html), the write-up (blog.html) and the data they 
 pipeline/      every step from channel list to finished map, in the order above
 scripts/       shell runners that chained the steps overnight, and shot.py for screenshots
 experiments/   the layout, tidy and vote tests behind the choices in knn.py
-docs/          README images (shots.py, compose.py)
+docs/          README images and GIFs (shots.py, compose.py, morph.py, sections.py)
 ```
 
 ## Run it
