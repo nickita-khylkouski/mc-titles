@@ -29,6 +29,8 @@ There is also a write-up, `web/blog.html`, covering what changed over 17 years: 
 
 ## How it's built
 
+Every script named here is in `pipeline/`.
+
 1. **Channels.** Candidates come from a hand-picked MCYT list plus scrapes of Minecraft hashtag and search pages. An OpenAI model reads each channel's 25 newest titles, and channels that are at least 50% Minecraft are kept (`build_list.py`, `classify.py`).
 2. **Videos.** Every long video and Short comes from the YouTube Data API upload playlists, plus views and duration (`fetch_videos.py`, `fetch_details.py`). Each title is tagged "is this Minecraft?" so other games can be hidden (`tag_mc.py`).
 3. **Embeddings.** Titles, cleaned descriptions and thumbnails are embedded (`embed.py`, `embed_rich.py`, `thumbs.py`, `embed_thumbs.py`).
@@ -41,6 +43,17 @@ There is also a write-up, `web/blog.html`, covering what changed over 17 years: 
 6. **Numbers.** `islands.py`, `insights.py`, `analyze.py`, `stats.py`, `finds.py` and `viz.py` compute the UI's panels and the blog's charts.
 
 The front end is one HTML file, `web/index.html`, drawing all the dots with WebGL. There is no framework and no build step.
+
+## What's where
+
+```
+serve.py       the local server: web/ plus the search and neighbour endpoints
+web/           the map (index.html), the write-up (blog.html) and the data they load
+pipeline/      every step from channel list to finished map, in the order above
+scripts/       shell runners that chained the steps overnight, and shot.py for screenshots
+experiments/   the layout, tidy and vote tests behind the choices in knn.py
+docs/          README images (shots.py, compose.py)
+```
 
 ## Run it
 
