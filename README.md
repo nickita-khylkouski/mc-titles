@@ -14,6 +14,10 @@ There are three maps of the same videos, each built from a different embedding:
 
 ![All three embeddings](docs/embeddings.jpg)
 
+The same videos flying between the three maps, coloured by their title topic. Clusters that hold together are topics all three embeddings agree on; the thumbnail map mixes title topics much more.
+
+![The same videos moving between the three maps](docs/morph.gif)
+
 ## What you can do with it
 
 - **Search an idea.** Type "herobrine" and the 3,000 closest videos light up, with the clusters they fall in, the closest titles and how common the idea was each month. On the thumbnail map you can search a picture in words ("red arrow and shocked face"), because Gemini puts text and images in one space.
