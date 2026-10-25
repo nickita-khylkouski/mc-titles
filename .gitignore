@@ -1,6 +1,7 @@
 .env
-data/
+/data/
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
+/docs/*.png

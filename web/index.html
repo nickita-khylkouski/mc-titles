@@ -6,13 +6,13 @@
 <title>Minecraft YouTube, mapped by title</title>
 <style>
 /* near-black ground, hairline panels, white for "on"; mint only for things that rose */
-:root{--ground:#0b0d11;--panel:rgba(16,19,25,.92);--well:#0d1015;--raise:#1d222c;--hover:#252b37;--line:#232833;--line2:#363d4b;
-  --ink:#eceef2;--ink2:#9aa2b1;--ink3:#6b7383;--accent:#c9f5d6;--accent-soft:#9fe3b3;--accent-ink:#0b0d11;--island:#9cc3ff;--r:10px;
+:root{--ground:#000000;--panel:rgba(8,8,8,.92);--well:#050505;--raise:#1c1c1c;--hover:#262626;--line:#222222;--line2:#3a3a3a;
+  --ink:#f5f5f5;--ink2:#a3a3a3;--ink3:#6e6e6e;--accent:#ffffff;--accent-soft:#d4d4d4;--accent-ink:#000000;--island:#bdbdbd;--r:10px;
   --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--ground);color:var(--ink);font:13px/1.45 var(--font);overflow:hidden;
   -webkit-font-smoothing:antialiased}
-::selection{background:#2f3a4d}
+::selection{background:#3a3a3a}
 :focus-visible{outline:1px solid var(--ink2);outline-offset:2px}
 *{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
 button{font:inherit;color:inherit}
@@ -40,11 +40,11 @@ input::placeholder{color:var(--ink3)}
 .btn:hover{border-color:var(--line2)}
 a.btn{display:block;text-align:center;color:inherit;text-decoration:none;box-sizing:border-box}
 .row{display:flex;align-items:center;gap:8px;padding:4px 6px;margin:0 -6px;border-radius:6px;cursor:pointer}
-.row:hover{background:#1a1f28}
+.row:hover{background:#1a1a1a}
 .row .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .v{color:var(--ink2);font-variant-numeric:tabular-nums;font-size:12px;flex:none}
 .row .v.up{color:var(--accent-soft);font-size:11px}
-.bar{height:3px;border-radius:2px;background:#2c3340;margin:-1px 0 3px}
+.bar{height:3px;border-radius:2px;background:#2b2b2b;margin:-1px 0 3px}
 .bar i{display:block;height:100%;border-radius:2px}
 h2{font-size:10.5px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.09em;margin:0 0 8px}
 .title{font-size:14px;font-weight:650;line-height:1.3;margin:0;color:var(--ink);text-transform:none;letter-spacing:0}
@@ -63,14 +63,14 @@ dl.facts{display:grid;grid-template-columns:1fr auto;gap:3px 12px;margin:8px 0 0
 dl.facts dt{color:var(--ink2)}
 dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 #card,#mres{display:none;margin-top:8px;border:1px solid var(--line);border-radius:8px;padding:10px}
-#hot{top:14px;right:14px;width:270px;padding:12px 14px 8px;max-height:calc(100% - 150px);overflow:auto}
-#info{top:14px;right:14px;width:330px;padding:12px 14px 10px;max-height:calc(100% - 150px);overflow:auto;display:none}
-#info img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#1a1f28;margin:0 0 8px;cursor:pointer}
-#info .x.on-img{position:absolute;top:18px;right:20px;margin:0;background:rgba(11,13,17,.85);color:var(--ink)}
+#hot{top:46px;right:14px;width:270px;padding:12px 14px 8px;max-height:calc(100% - 182px);overflow:auto}
+#info{top:46px;right:14px;width:330px;padding:12px 14px 10px;max-height:calc(100% - 182px);overflow:auto;display:none}
+#info img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#1a1a1a;margin:0 0 8px;cursor:pointer}
+#info .x.on-img{position:absolute;top:18px;right:20px;margin:0;background:rgba(0,0,0,.85);color:var(--ink)}
 .bc{width:100%;height:22px;display:block;border-radius:3px;margin:3px 0;image-rendering:pixelated}
 .bc.s{height:11px}
 .nn{display:flex;gap:7px;align-items:baseline;padding:3px 6px;margin:0 -6px;border-radius:6px;cursor:pointer;font-size:12px}
-.nn:hover{background:#1a1f28}
+.nn:hover{background:#1a1a1a}
 .nn .s{color:var(--accent);font-variant-numeric:tabular-nums;width:30px;flex:none;font-size:11.5px}
 .nn .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nn .c{color:var(--ink3)}
@@ -87,23 +87,45 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 #play{flex:none;padding:5px 12px}
 #histwrap{flex:1;position:relative}
 #hist{position:absolute;inset:0;width:100%;height:100%;cursor:ew-resize}
-#tip{position:absolute;pointer-events:none;max-width:360px;padding:8px 10px;background:#10141a;border:1px solid #2b313d;
+#tip{position:absolute;pointer-events:none;max-width:360px;padding:8px 10px;background:#0a0a0a;border:1px solid #2e2e2e;
   border-radius:8px;display:none;font-size:12.5px;z-index:5}
 #tip .t{font-weight:600;margin-bottom:3px;line-height:1.3}
-#tip img{display:block;width:240px;aspect-ratio:16/9;object-fit:cover;border-radius:5px;margin-bottom:6px;background:#1a1f28}
+#tip img{display:block;width:240px;aspect-ratio:16/9;object-fit:cover;border-radius:5px;margin-bottom:6px;background:#1a1a1a}
 #tip .m{color:var(--ink2);font-size:11.5px}
 #tip .isl{color:var(--island)}
-#sugg{position:fixed;z-index:20;display:none;margin:0;padding:4px;list-style:none;background:#10141a;border:1px solid #2b313d;
+#sugg{position:fixed;z-index:20;display:none;margin:0;padding:4px;list-style:none;background:#0a0a0a;border:1px solid #2e2e2e;
   border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.5);max-height:360px;overflow:auto}
 #sugg li{display:flex;gap:10px;align-items:baseline;padding:5px 8px;border-radius:5px;cursor:pointer}
 #sugg li.hi{background:var(--raise)}
 #sugg li .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #sugg li .v{color:var(--ink2);font-size:11.5px;font-variant-numeric:tabular-nums;flex:none}
 #sugg li.g{color:var(--ink3);font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;cursor:default;padding:8px 8px 3px}
+#links{position:absolute;top:14px;right:14px;display:flex;gap:2px;z-index:6}
+#links>*{background:none;border:0;color:var(--ink2);font:12px/1 var(--font);padding:7px 10px;border-radius:6px;cursor:pointer;text-decoration:none}
+#links>*:hover{color:var(--ink);background:rgba(255,255,255,.07)}
+#key{margin-top:7px;font-size:11.5px;color:var(--ink2);display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;min-height:16px}
+#key i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:-0px}
+#key .grad{display:inline-block;width:120px;height:6px;border-radius:3px;vertical-align:middle;margin:0 6px}
+#filt{margin-top:12px;border-top:1px solid var(--line);padding-top:2px}
+#filt summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:8px;padding:8px 0 4px;user-select:none}
+#filt summary::-webkit-details-marker{display:none}
+#filt summary .lab{margin:0;flex:none}
+#filt summary .lab::before{content:"";display:inline-block;width:5px;height:5px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;
+  transform:rotate(-45deg);margin:0 7px 1px 1px;transition:transform .15s}
+#filt[open] summary .lab::before{transform:rotate(45deg)}
+#filtsum{color:var(--ink2);font-size:11.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#filt summary:hover #filtsum,#filt summary:hover .lab{color:var(--ink)}
+#filt .seg{margin-top:6px}
+.lab.sm{margin:10px 0 5px}
+#zoom{left:320px;bottom:136px;display:flex;flex-direction:column;padding:0;overflow:hidden;border-radius:8px}
+#zoom button{width:32px;height:30px;display:grid;place-items:center;background:none;border:0;color:var(--ink2);cursor:pointer;font-size:17px;line-height:1}
+#zoom button+button{border-top:1px solid var(--line)}
+#zoom button:hover{color:var(--ink);background:var(--raise)}
+#more{display:none;float:right;padding:4px 10px;margin:-2px 0 0 8px;flex:none}
 #loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink2)}
 .hint{color:var(--ink3);font-size:11px;margin:12px 0 0;line-height:1.5}
 .hint b{color:var(--island);font-weight:500}
-#ins{left:320px;right:14px;top:14px;bottom:136px;z-index:8;display:none;overflow:auto;padding:24px 34px 36px;background:rgba(14,17,22,.97)}
+#ins{left:320px;right:14px;top:14px;bottom:136px;z-index:8;display:none;overflow:auto;padding:24px 34px 36px;background:rgba(5,5,5,.97)}
 #ins article{max-width:860px}
 #ins .x{position:sticky;top:0}
 #ins h2{font-size:22px;font-weight:650;color:var(--ink);text-transform:none;letter-spacing:-.01em;margin:0 0 6px;line-height:1.2}
@@ -121,17 +143,28 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 #ins .big{font-size:28px;font-weight:650;letter-spacing:-.02em;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
 #ins .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:12px;background:var(--line);
   border:1px solid var(--line);border-radius:8px;overflow:hidden}
-#ins .three>div{background:#0f1217;padding:12px 14px}
+#ins .three>div{background:#0a0a0a;padding:12px 14px}
 #ins .three p{font-size:12px;margin:4px 0 0}
 #ins table{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:8px}
 #ins td,#ins th{padding:6px 10px 5px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 #ins th{color:var(--ink3);font-weight:500;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em}
 #ins td .m,#ins td.m{color:var(--ink3)}
 #ins h4.ah{margin:26px 0 4px;font-size:13.5px;font-weight:650;line-height:1.35}
-#ins tr.c{cursor:pointer} #ins tr.c:hover td{background:#161a21}
+#ins tr.c{cursor:pointer} #ins tr.c:hover td{background:#161616}
 #ins .cl{cursor:pointer;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:2px}
 #ins .cl:hover{text-decoration-color:var(--ink)}
 #ins .m{color:var(--ink3)}
+@media (max-width:760px){
+  #side{left:8px;right:8px;top:8px;width:auto;max-height:60vh;padding:10px 12px}
+  #side:not(.open) .mhide{display:none} #more{display:block}
+  #movers,.hint,#hot{display:none!important}
+  #info{left:8px;right:8px;top:auto;bottom:96px;width:auto;max-height:46vh}
+  #time{left:8px;right:8px;bottom:8px;height:80px;padding:8px 10px;gap:10px}
+  #tctl{width:128px} #yr{font-size:17px} #wincount{font-size:11px} #wsize{display:none}
+  #zoom{left:auto;right:8px;bottom:96px}
+  #links{top:auto;right:auto;left:4px;bottom:94px}
+  #ins{left:8px;right:8px;top:8px;bottom:96px;padding:16px 18px 24px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -142,12 +175,11 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 <div id="loading">Loading videos…</div>
 
 <div id="side" class="panel">
+  <button class="act" id="more" aria-expanded="false" aria-controls="side">Options</button>
   <h1 id="title">Minecraft YouTube, by title</h1>
   <p class="sub" id="counts"></p>
-  <span class="lab">Map by</span>
-  <div class="seg" id="src"><button data-v="">Titles</button><button data-v="rich" title="Title and description">Descriptions</button><button data-v="thumb">Thumbnails</button></div>
-  <button class="btn" id="insbtn">Insights & how the map works</button>
-  <a class="btn" id="blogbtn" href="blog.html">Read the write-up: 15 years in numbers</a>
+  <span class="lab mhide">Map by</span>
+  <div class="seg mhide" id="src"><button data-v="">Titles</button><button data-v="rich" title="Title and description">Descriptions</button><button data-v="thumb">Thumbnails</button></div>
   <label class="lab" for="q">Search</label>
   <input type="search" id="q" placeholder="Channel or anything, e.g. herobrine" autocomplete="off" spellcheck="false"
     role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg">
@@ -159,20 +191,23 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
     <h3>Mostly in</h3>
     <div id="ctop"></div>
   </div>
-  <span class="lab">Colour by</span>
-  <div class="seg" id="mode"><button data-v="0" class="on">Year</button><button data-v="1">Cluster</button><button data-v="2">Long / Short</button></div>
-  <span class="lab">Show</span>
+  <span class="lab mhide">Colour by</span>
+  <div class="seg mhide" id="mode"><button data-v="0" class="on">Year</button><button data-v="1">Cluster</button><button data-v="2">Long / Short</button></div>
+  <div id="key" class="mhide"></div>
+  <details id="filt" class="mhide"><summary><span class="lab">Filters</span><span id="filtsum"></span></summary>
   <div class="seg" id="kinds"><button data-v="3" class="on">All</button><button data-v="1">Long</button><button data-v="2">Shorts</button></div>
   <div class="seg" id="games"><button data-v="0" class="on">Minecraft only</button><button data-v="1">+ Other games</button></div>
   <div class="seg" id="isl" title="Places where most neighbours are one channel's own videos">
     <button data-v="1" class="on">Channel islands</button><button data-v="0">Dim islands</button></div>
-  <span class="lab" id="countlab">Count</span>
+  <span class="lab sm" id="countlab">Count</span>
   <div class="seg" id="count"><button data-v="0" class="on">Uploads</button><button data-v="1">Views</button></div>
+  </details>
   <div id="movers"></div>
-  <p class="hint">Drag to pan, scroll to zoom. Click a dot for its numbers, ⌘-click to watch. Click a cluster name for its story.
-    <b>Blue names</b> are channel islands. / search, Space play, Esc back.</p>
+  <p class="hint">Drag to pan, scroll or pinch to zoom. Click a dot for its numbers, ⌘-click to watch. Click a cluster name for its story.
+    <b>Grey italic names</b> are channel islands. / search, Space play, Esc back.</p>
 </div>
 <ul id="sugg" role="listbox"></ul>
+<nav id="links"><button id="insbtn">How it works</button><a id="blogbtn" href="blog.html">Read the write-up</a></nav>
 
 <div id="hot" class="panel">
   <h2 id="hotk">Biggest clusters</h2>
@@ -188,6 +223,7 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
   <div id="histwrap"><canvas id="hist"></canvas></div>
 </div>
 <div id="info" class="panel"></div>
+<div id="zoom" class="panel"><button data-z="1" aria-label="Zoom in">+</button><button data-z="-1" aria-label="Zoom out">−</button><button data-z="0" aria-label="Fit the whole map" title="Fit the whole map"><svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><path d="M1.5 4.5v-3h3M8.5 1.5h3v3M11.5 8.5v3h-3M4.5 11.5h-3v-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
 <div id="ins" class="panel"></div>
 <div id="tip"></div>
 
@@ -264,7 +300,7 @@ async function load() {
 const gl = $("#gl").getContext("webgl2", {antialias: false, premultipliedAlpha: true});
 const VS = `#version 300 es
 in vec2 a_pos; in uint a_ch; in uint a_m; in int a_cl; in uint a_kind; in uint a_game; in float a_hit; in float a_isl; in float a_q;
-uniform vec2 u_c; uniform vec2 u_s; uniform float u_t0, u_t1, u_m0, u_m1, u_size, u_trail, u_win;
+uniform vec2 u_c; uniform vec2 u_s; uniform float u_t0, u_t1, u_m0, u_m1, u_size, u_trail, u_win, u_a;
 uniform int u_mode, u_sel, u_selCl, u_pass, u_kinds, u_games, u_count, u_isl, u_q;
 out vec4 v_col; flat out int v_pass;
 vec3 ramp(float t){
@@ -288,7 +324,7 @@ void main(){
   if (u_mode == 0) c = ramp((m - u_m0) / (u_m1 - u_m0));
   else if (u_mode == 1) c = a_cl < 0 ? vec3(.35) : vec3(.5) + (hue(fract(float(a_cl)*.61803)) - .5)*.85;
   else c = a_kind == 1u ? vec3(1.,.42,.55) : vec3(.42,.72,1.);
-  float a = .5, size = 1.;
+  float a = u_a, size = 1.;
   if (u_count == 1) {  // views: a channel's hits glow, its flops fade
     float h = clamp(a_hit / 3., -1., 1.);
     a *= h < 0. ? 1. + .8 * h : 1. + .9 * h; size = 1. + .9 * max(h, 0.);
@@ -324,7 +360,7 @@ const prog = gl.createProgram();
 gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
 gl.linkProgram(prog);
 if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-const U = {}; for (const n of ["u_c","u_s","u_t0","u_t1","u_trail","u_win","u_m0","u_m1","u_size","u_mode","u_sel","u_selCl","u_pass","u_kinds","u_games","u_count","u_isl","u_q"])
+const U = {}; for (const n of ["u_c","u_s","u_t0","u_t1","u_trail","u_win","u_a","u_m0","u_m1","u_size","u_mode","u_sel","u_selCl","u_pass","u_kinds","u_games","u_count","u_isl","u_q"])
   U[n] = gl.getUniformLocation(prog, n);
 
 function upload(buf) {
@@ -353,12 +389,39 @@ function resize() {
   const hc = $("#hist"); hc.width = hc.clientWidth * DPR; hc.height = hc.clientHeight * DPR;
   dirty = true; histDirty = true;
 }
+// the part of the screen no panel covers, so fits, fly-tos and labels aim there
+function freeArea() {
+  const r = id => { const e = $(id); return e && e.offsetParent !== null && getComputedStyle(e).display !== "none" ? e.getBoundingClientRect() : null; };
+  const side = r("#side"), right = r("#info") || r("#hot"), time = r("#time");
+  if (W <= 760) return [8, side ? side.bottom + 8 : 8, W - 8, time ? time.top - 8 : H - 8];
+  return [side ? side.right + 8 : 8, 8, right ? right.left - 8 : W - 8, time ? time.top - 8 : H - 8];
+}
+let anim = null;
+function camTo(cx, cy, s, ms = 520) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) ms = 0;
+  anim = {a: {cx: S.cx, cy: S.cy, s: S.s}, b: {cx, cy, s}, t0: performance.now(), ms}; dirty = true;
+}
+function stepAnim(now) {
+  if (!anim) return;
+  const t = anim.ms ? Math.min(1, (now - anim.t0) / anim.ms) : 1, e = t < .5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+  const {a, b} = anim, ls = Math.log(a.s) + (Math.log(b.s) - Math.log(a.s)) * e;  // zoom in log space so it feels even
+  S.s = Math.exp(ls);
+  // keep the target point moving on a straight screen path: blend the centre in data space
+  S.cx = a.cx + (b.cx - a.cx) * e; S.cy = a.cy + (b.cy - a.cy) * e; dirty = true;
+  if (t >= 1) anim = null;
+}
+// camera centre that puts data point (x, y) in the middle of the free area at scale s
+function centreFor(x, y, s) {
+  const [a, b, c, d] = freeArea();
+  return [x - ((a + c) / 2 - W / 2) / s, y + ((b + d) / 2 - H / 2) / s];
+}
+let FIT = null;
 const win = () => S.w === 0 ? [mMin, mMax] : [S.end - S.w + 1, S.end];
 const toScreen = (x, y) => [W / 2 + (x - S.cx) * S.s, H / 2 - (y - S.cy) * S.s];
 const toData = (px, py) => [S.cx + (px - W / 2) / S.s, S.cy - (py - H / 2) / S.s];
 
 function drawGL() {
-  gl.viewport(0, 0, W * DPR, H * DPR); gl.clearColor(0.043, 0.051, 0.067, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.viewport(0, 0, W * DPR, H * DPR); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT);
   gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.useProgram(prog);
   const [t0, t1] = win();
   gl.uniform2f(U.u_c, S.cx, S.cy); gl.uniform2f(U.u_s, 2 * S.s / W, 2 * S.s / H);
@@ -366,6 +429,7 @@ function drawGL() {
   gl.uniform1f(U.u_size, Math.min(7, Math.max(1.6, 1.8 * Math.sqrt(S.s / S.s0))) * DPR);
   gl.uniform1i(U.u_mode, S.mode); gl.uniform1i(U.u_sel, S.sel); gl.uniform1i(U.u_selCl, S.selCl);
   gl.uniform1i(U.u_kinds, S.kinds); gl.uniform1i(U.u_games, S.games); gl.uniform1i(U.u_count, S.count); gl.uniform1i(U.u_isl, S.isl); gl.uniform1i(U.u_q, S.q ? 1 : 0);
+  gl.uniform1f(U.u_a, Math.min(.5, .34 + .16 * Math.log2(Math.max(1, S.s / S.s0)) / 2));
   gl.uniform1f(U.u_trail, 24); gl.uniform1f(U.u_win, S.w ? 1 : 0);
   if (S.w && S.sel < 0 && S.selCl < 0) { gl.uniform1i(U.u_pass, 2); gl.drawArrays(gl.POINTS, 0, N); }
   gl.uniform1i(U.u_pass, 0); gl.drawArrays(gl.POINTS, 0, N);
@@ -373,21 +437,22 @@ function drawGL() {
 }
 
 // ---------- window stats (what's big in this era) ----------
-let winCl = null, winTotal = 0, allCl = null, allTotal = 0, hotId = -1, hotTrail = [];
+let chIsl = null, winCl = null, winTotal = 0, allCl = null, allTotal = 0, hotId = -1, hotTrail = [];
 const vis = k => ((S.kinds >> KIND[k]) & 1) && (S.games || !GAME[k]);
 const liftOf = id => (winCl[id] / Math.max(1, winTotal)) / Math.max(1e-9, allCl[id] / Math.max(1, allTotal));
 function windowStats() {
   const [t0, t1] = win(), nc = meta.clusters.length ? Math.max(...meta.clusters.map(c => c.id)) + 1 : 0;
   winCl = new Float64Array(nc); winTotal = 0; allCl = new Float64Array(nc); allTotal = 0;
-  let nWin = 0; chWin = new Uint32Array(meta.channels.length);
+  let nWin = 0; chWin = new Uint32Array(meta.channels.length); chIsl = new Uint32Array(meta.channels.length);
   for (let k = 0; k < N; k++) {
     if (!vis(k)) continue;
     const w = S.count ? VIEWS[k] : 1;
     allTotal += w; if (CL[k] >= 0) allCl[CL[k]] += w;
     if (MO[k] < t0 || MO[k] > t1) continue;
-    nWin++; chWin[CH[k]]++; winTotal += w; if (CL[k] >= 0) winCl[CL[k]] += w;
+    nWin++; chWin[CH[k]]++; if (ISL[k] > 128) chIsl[CH[k]]++; winTotal += w; if (CL[k] >= 0) winCl[CL[k]] += w;
   }
   $("#wincount").textContent = nWin.toLocaleString() + " videos" + (S.count ? ", " + fmt(winTotal) + " views" : "");
+  updateHeader();
   const short = m => MON[m % 12] + " " + String(yOf(m)).slice(2);
   $("#yr").style.fontSize = S.w && !(S.w === 12 && t0 % 12 === 0) ? "17px" : "";
   $("#yr").textContent = S.w === 0 ? "All years" : S.w === 12 && t0 % 12 === 0 ? "" + yOf(t0)
@@ -409,9 +474,29 @@ function windowStats() {
   const mx = rows.length ? rows[0].n : 1;
   $("#hotlist").innerHTML = rows.map(r => `<div class="row" data-cl="${r.c.id}"><span class="n">${esc(r.c.name)}</span>
     ${all || r.lift < 1.5 ? "" : `<span class="v up" title="Share of uploads against its usual share">${r.lift.toFixed(1)}×</span>`}<span class="v">${fmt(r.n)}</span></div>
-    <div class="bar"><i style="width:${(100 * r.n / mx).toFixed(1)}%;background:${rgb(S.mode === 1 ? clusterRGB(r.c.id) : [126, 138, 160])}"></i></div>`).join("");
+    <div class="bar"><i style="width:${(100 * r.n / mx).toFixed(1)}%;background:${rgb(S.mode === 1 ? clusterRGB(r.c.id) : [150, 150, 150])}"></i></div>`).join("");
 }
-$("#hotlist").addEventListener("click", e => { const r = e.target.closest(".row"); if (r) openCluster(+r.dataset.cl); });
+$("#hotlist").addEventListener("click", e => {
+  const r = e.target.closest(".row"); if (!r) return;
+  const c = clusterById.get(+r.dataset.cl); openCluster(c.id);
+  if (S.selCl === c.id) requestAnimationFrame(() => flyTo(c.x, c.y, 2.2));  // after the info panel replaces the list
+});
+
+// header count, legend and the folded filters' one-line summary all follow the current settings
+let NMC = 0;
+function updateHeader() {
+  let n = 0; for (let k = 0; k < N; k++) if (vis(k)) n++;
+  const what = (S.kinds === 2 ? "Shorts" : S.kinds === 1 ? "long videos" : "videos");
+  $("#counts").textContent = `${n.toLocaleString()} ${S.games ? what + ", all games" : "Minecraft " + what} · ${meta.channels.length} channels`;
+  $("#counts").title = `${NMC.toLocaleString()} Minecraft videos and ${(N - NMC).toLocaleString()} from the same channels about other games`;
+  const on = id => $(id + " button.on").textContent;
+  $("#filtsum").textContent = [on("#kinds"), S.games ? "+ other games" : "Minecraft only", S.isl ? "" : "islands dimmed", hasViews ? "by " + on("#count").toLowerCase() : ""].filter(Boolean).join(" · ");
+  const K = $("#key"), sw = c => `<i style="background:${c}"></i>`;
+  K.innerHTML = S.mode === 0 ? `${yOf(mMin)}<span class="grad" style="background:linear-gradient(90deg,${STOPS.map(rgb).join(",")})"></span>${yOf(mMax)}`
+    : S.mode === 1 ? `<span>${[3, 11, 27, 40].map(k => sw(rgb(clusterRGB(k)))).join("").replace(/margin-right:5px/g, "")}One colour per cluster</span><span>${sw("rgb(90,90,90)")}No cluster</span>`
+    : `<span>${sw("rgb(107,184,255)")}Long video</span><span>${sw("rgb(255,107,140)")}Short</span>`;
+  if (S.count) K.insertAdjacentHTML("beforeend", `<span style="flex-basis:100%;color:var(--ink3)">Bright, big dots were hits for their channel; faint ones flopped.</span>`);
+}
 
 // ---------- overlay: labels, channel path, hover ring ----------
 function drawOverlay() {
@@ -420,11 +505,14 @@ function drawOverlay() {
   labelHits = [];
   ctx.textAlign = "center"; ctx.textBaseline = "middle";
   const cls = S.w && winCl ? [...meta.clusters].sort((a, b) => winCl[b.id] - winCl[a.id]) : [...meta.clusters].sort((a, b) => b.size - a.size);
-  const maxLabels = Math.round(14 + 60 * Math.min(1, Math.log2(S.s / S.s0) / 3.5));
+  const [fa, fb, fc, fd] = freeArea(), PAD = 3, room = Math.min(1, (fc - fa) * (fd - fb) / (880 * 760));
+  const maxLabels = Math.round((5 + 7 * room) * (1 + 5 * Math.min(1, Math.max(0, Math.log2(S.s / S.s0)) / 3.5)));
+  const hits = box => placed.some(p => !(box[2] + PAD < p[0] || box[0] - PAD > p[2] || box[3] + PAD < p[1] || box[1] - PAD > p[3]));
+  const inside = box => box[0] >= fa && box[2] <= fc && box[1] >= fb && box[3] <= fd;  // a label under a panel is a wasted slot
   for (const c of cls) {
     if (placed.length >= maxLabels) break;
     const [sx, sy] = toScreen(c.x, c.y);
-    if (sx < 0 || sy < 0 || sx > W || sy > H) continue;
+    if (sx < fa || sy < fb || sx > fc || sy > fd) continue;
     let alpha = 0.85;
     if (winCl && winCl[c.id] === 0) continue;
     let tag = "";
@@ -434,30 +522,34 @@ function drawOverlay() {
       alpha = Math.min(1, 0.45 + 0.25 * lift); tag = lift >= 2 ? "  " + lift.toFixed(lift >= 10 ? 0 : 1) + "×" : "";
     }
     if (S.selCl >= 0) alpha = c.id === S.selCl ? 1 : 0.15;
-    const fs = Math.round(10.5 + 4 * Math.min(1, Math.sqrt(c.size / cls[0].size)));
-    ctx.font = `600 ${fs}px ui-sans-serif,system-ui,-apple-system,sans-serif`;
-    const label = c.name + tag, w = ctx.measureText(label).width + 8, h = fs + 4;
+    const fs = Math.round(11 + 3.5 * Math.min(1, Math.sqrt(c.size / cls[0].size)));
+    ctx.font = `${c.size >= cls[0].size * 0.25 ? 650 : 560} ${fs}px ui-sans-serif,system-ui,-apple-system,sans-serif`;
+    const label = c.name + tag, w = ctx.measureText(label).width + 12, h = fs + 7;
     const box = [sx - w / 2, sy - h / 2, sx + w / 2, sy + h / 2];
-    if (placed.some(p => !(box[2] < p[0] || box[0] > p[2] || box[3] < p[1] || box[1] > p[3]))) continue;
+    if (!inside(box) || hits(box)) continue;
     placed.push(box); labelHits.push({box, cl: c.id});
-    ctx.globalAlpha = alpha; ctx.lineWidth = 3.5; ctx.strokeStyle = "rgba(8,10,14,.9)"; ctx.strokeText(label, sx, sy);
-    ctx.fillStyle = tag ? "#c9f5d6" : "#f1f3f7"; ctx.fillText(label, sx, sy);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = c.id === S.selCl ? "rgba(255,255,255,.95)" : "rgba(0,0,0,.8)";
+    ctx.beginPath(); ctx.roundRect(box[0] + .5, box[1] + .5, w - 1, h - 1, 5); ctx.fill();
+    if (c.id !== S.selCl) { ctx.lineWidth = 1; ctx.strokeStyle = "rgba(255,255,255,.13)"; ctx.stroke(); }
+    ctx.fillStyle = c.id === S.selCl ? "#000" : "#f5f5f5"; ctx.fillText(label, sx, sy + 0.5);
   }
   // channel islands: label each with its channel, in italic blue, where it doesn't collide with a cluster label
   if (S.isl && S.selCl < 0) {
-    ctx.font = "italic 600 12px ui-sans-serif,system-ui,-apple-system,sans-serif";
+    ctx.font = "italic 500 11.5px ui-sans-serif,system-ui,-apple-system,sans-serif";
     let n = 0;
     for (const o of meta.islands) {
       if (n >= Math.round(maxLabels * 0.6)) break;
-      if (chWin && chWin[o.ch] < (S.w ? 8 : 60)) continue;
-      const [sx, sy] = toScreen(o.x, o.y);
+      if (chIsl && chIsl[o.ch] < (S.w ? 8 : 60)) continue;  // its island has to be on screen: shown by the filters, in the window
+      if (!S.games && o.mx == null) continue;  // an island of other-game videos, filtered out
+      const [sx, sy] = S.games ? toScreen(o.x, o.y) : toScreen(o.mx, o.my);
       if (sx < 0 || sy < 0 || sx > W || sy > H) continue;
       const w = ctx.measureText(o.name).width + 8, h = 15, box = [sx - w / 2, sy - h / 2, sx + w / 2, sy + h / 2];
-      if (placed.some(p => !(box[2] < p[0] || box[0] > p[2] || box[3] < p[1] || box[1] > p[3]))) continue;
+      if (!inside(box) || hits(box)) continue;
       placed.push(box); labelHits.push({box, ch: o.ch}); n++;
       ctx.globalAlpha = S.sel >= 0 && S.sel !== o.ch ? 0.2 : 0.9;
-      ctx.lineWidth = 3; ctx.strokeStyle = "rgba(8,10,14,.9)"; ctx.strokeText(o.name, sx, sy);
-      ctx.fillStyle = "#9cc3ff"; ctx.fillText(o.name, sx, sy);
+      ctx.lineWidth = 3.5; ctx.lineJoin = "round"; ctx.strokeStyle = "rgba(0,0,0,.92)"; ctx.strokeText(o.name, sx, sy);
+      ctx.fillStyle = "#bdbdbd"; ctx.fillText(o.name, sx, sy);
     }
   }
   ctx.globalAlpha = 1;
@@ -476,18 +568,18 @@ function drawHot() {
   const pts = hotTrail.map(id => toScreen(CL_BY_ID[id].x, CL_BY_ID[id].y));
   ctx.lineCap = "round";
   for (let i = 1; i < pts.length; i++) {
-    ctx.globalAlpha = 0.15 + 0.5 * i / pts.length; ctx.lineWidth = 2; ctx.strokeStyle = "#c9f5d6";
+    ctx.globalAlpha = 0.15 + 0.5 * i / pts.length; ctx.lineWidth = 2; ctx.strokeStyle = "#ffffff";
     ctx.beginPath(); ctx.moveTo(...pts[i - 1]); ctx.lineTo(...pts[i]); ctx.stroke();
   }
   const [sx, sy] = pts[pts.length - 1], ph = (performance.now() / 900) % 1;
   for (const k of [0, 0.5]) {
     const f = (ph + k) % 1;
-    ctx.globalAlpha = S.playing ? 0.9 * (1 - f) : k ? 0 : 0.8; ctx.lineWidth = 2.5; ctx.strokeStyle = "#c9f5d6";
+    ctx.globalAlpha = S.playing ? 0.9 * (1 - f) : k ? 0 : 0.8; ctx.lineWidth = 2.5; ctx.strokeStyle = "#ffffff";
     ctx.beginPath(); ctx.arc(sx, sy, S.playing ? 12 + 30 * f : 22, 0, 7); ctx.stroke();
   }
   ctx.globalAlpha = 1; ctx.font = "700 12px ui-sans-serif,system-ui,-apple-system,sans-serif";
-  ctx.lineWidth = 3.5; ctx.strokeStyle = "rgba(8,10,14,.9)"; ctx.strokeText("Rising fastest", sx, sy + 36);
-  ctx.fillStyle = "#c9f5d6"; ctx.fillText("Rising fastest", sx, sy + 36);
+  ctx.lineWidth = 3.5; ctx.strokeStyle = "rgba(0,0,0,.9)"; ctx.strokeText("Rising fastest", sx, sy + 36);
+  ctx.fillStyle = "#ffffff"; ctx.fillText("Rising fastest", sx, sy + 36);
   if (!S.playing) return;
   dirty = true;  // keep the pulse animating while playing
 }
@@ -500,7 +592,7 @@ function drawPath(path, t0, t1) {
   for (let i = 1; i < pts.length; i++) {
     const a = toScreen(pts[i - 1][1], pts[i - 1][2]), b = toScreen(pts[i][1], pts[i][2]);
     ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b);
-    ctx.lineWidth = 5; ctx.strokeStyle = "rgba(8,10,14,.75)"; ctx.stroke();
+    ctx.lineWidth = 5; ctx.strokeStyle = "rgba(0,0,0,.75)"; ctx.stroke();
     ctx.lineWidth = 2.2; ctx.strokeStyle = rgb(ramp((pts[i][0] - mMin) / (mMax - mMin))); ctx.stroke();
   }
   let lastYear = -1;
@@ -509,11 +601,11 @@ function drawPath(path, t0, t1) {
     const [sx, sy] = toScreen(p[1], p[2]), r = 1.5 + Math.sqrt(p[3]) * 0.7, last = i === pts.length - 1;
     ctx.beginPath(); ctx.arc(sx, sy, last ? r + 3 : r, 0, 7);
     ctx.fillStyle = rgb(ramp((p[0] - mMin) / (mMax - mMin))); ctx.fill();
-    ctx.lineWidth = last ? 2 : 1; ctx.strokeStyle = last ? "#fff" : "rgba(8,10,14,.8)"; ctx.stroke();
+    ctx.lineWidth = last ? 2 : 1; ctx.strokeStyle = last ? "#fff" : "rgba(0,0,0,.8)"; ctx.stroke();
     const y = yOf(p[0]);
     if (y !== lastYear && (y % 2 === 0 || pts.length < 30) || last) {
       lastYear = y;
-      ctx.lineWidth = 3; ctx.strokeStyle = "rgba(8,10,14,.9)"; ctx.strokeText("" + y, sx + r + 4, sy);
+      ctx.lineWidth = 3; ctx.strokeStyle = "rgba(0,0,0,.9)"; ctx.strokeText("" + y, sx + r + 4, sy);
       ctx.fillStyle = "#fff"; ctx.fillText("" + y, sx + r + 4, sy);
     }
   });
@@ -534,11 +626,12 @@ function drawHist() {
     c.fillStyle = rgb(ramp((m - mMin) / (mMax - mMin))); c.globalAlpha = on ? 0.95 : 0.22;
     c.fillRect((m - mMin) * bw, h - padB - bh, Math.max(1, bw - 0.6), bh);
   }
-  c.globalAlpha = 1; c.fillStyle = "#6c7486"; c.font = "11px ui-sans-serif,system-ui,-apple-system,sans-serif"; c.textAlign = "center";
+  c.globalAlpha = 1; c.fillStyle = "#6e6e6e"; c.font = "11px ui-sans-serif,system-ui,-apple-system,sans-serif"; c.textAlign = "center";
   for (let y = yOf(mMin); y <= yOf(mMax); y++) {
     const m = (y - 2005) * 12; if (m < mMin) continue;
     c.fillRect((m - mMin) * bw, h - padB, 1, 4);
-    if (w / (span / 12) > 34 || y % 2 === 0) c.fillText("" + y, (m - mMin + 6) * bw, h - 4);
+    const every = Math.max(1, Math.ceil(34 / (w / (span / 12))));
+    if (y % every === 0) c.fillText("" + y, (m - mMin + 6) * bw, h - 4);
   }
   if (S.q) drawQHist(c, w, h, padB, bw);
   if (S.w) {
@@ -625,7 +718,7 @@ function showTip(k, px, py) {
 
 let drag = null;
 const glc = $("#gl");
-glc.addEventListener("pointerdown", e => { drag = {x: e.clientX, y: e.clientY, cx: S.cx, cy: S.cy, moved: false}; glc.setPointerCapture(e.pointerId); });
+glc.addEventListener("pointerdown", e => { anim = null; drag = {x: e.clientX, y: e.clientY, cx: S.cx, cy: S.cy, moved: false}; glc.setPointerCapture(e.pointerId); });
 glc.addEventListener("pointermove", e => {
   if (drag) {
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -647,12 +740,41 @@ glc.addEventListener("pointerup", e => {
 });
 glc.addEventListener("pointerleave", () => { S.hover = -1; showTip(-1); dirty = true; });
 glc.addEventListener("wheel", e => {
-  e.preventDefault();
-  const [x, y] = toData(e.clientX, e.clientY), f = Math.exp(-e.deltaY * 0.0015);
+  e.preventDefault(); anim = null;
+  const [x, y] = toData(e.clientX, e.clientY), f = Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015));  // ctrl = trackpad pinch
   S.s = Math.min(S.s0 * 400, Math.max(S.s0 * 0.5, S.s * f));
   S.cx = x - (e.clientX - W / 2) / S.s; S.cy = y + (e.clientY - H / 2) / S.s; dirty = true;
 }, {passive: false});
 
+$("#zoom").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const z = +b.dataset.z;
+  if (z === 0) { const [cx, cy] = centreFor(FIT.x, FIT.y, S.s0); return camTo(cx, cy, S.s0); }
+  // zoom about the middle of the free area
+  const [a, bb, c, d] = freeArea(), [x, y] = toData((a + c) / 2, (bb + d) / 2);
+  const s = Math.min(S.s0 * 400, Math.max(S.s0 * 0.5, S.s * (z > 0 ? 2 : 0.5))), [cx, cy] = centreFor(x, y, s);
+  camTo(cx, cy, s, 320);
+});
+// two-finger pinch on touch screens
+const touches = new Map(); let pinch = null;
+glc.addEventListener("pointerdown", e => {
+  if (e.pointerType !== "touch") return;
+  touches.set(e.pointerId, [e.clientX, e.clientY]);
+  if (touches.size === 2) {
+    const [p, q] = [...touches.values()], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+    pinch = {d: Math.hypot(p[0] - q[0], p[1] - q[1]), s: S.s, at: toData(mx, my)}; drag = null;
+  }
+});
+glc.addEventListener("pointermove", e => {
+  if (!touches.has(e.pointerId)) return;
+  touches.set(e.pointerId, [e.clientX, e.clientY]);
+  if (!pinch || touches.size !== 2) return;
+  const [p, q] = [...touches.values()], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+  S.s = Math.min(S.s0 * 400, Math.max(S.s0 * 0.5, pinch.s * Math.hypot(p[0] - q[0], p[1] - q[1]) / pinch.d));
+  S.cx = pinch.at[0] - (mx - W / 2) / S.s; S.cy = pinch.at[1] + (my - H / 2) / S.s; dirty = true;
+});
+for (const ev of ["pointerup", "pointercancel"]) glc.addEventListener(ev, e => { touches.delete(e.pointerId); if (touches.size < 2) pinch = null; });
+glc.style.touchAction = "none";
 function seg(id, fn) {
   $(id).addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
@@ -669,7 +791,7 @@ seg("#mode", v => { S.mode = v; changed(); });
 seg("#kinds", v => { S.kinds = v; changed(); });
 seg("#games", v => { S.games = v; changed(); });
 seg("#count", v => { S.count = v; changed(); });
-seg("#isl", v => { S.isl = v; dirty = true; });
+seg("#isl", v => { S.isl = v; dirty = true; updateHeader(); });
 $("#wsize").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { stopPlay(); setW(+b.dataset.v); } });
 
 function selectChannel(i) {
@@ -690,6 +812,9 @@ $("#ctop").addEventListener("click", e => { const r = e.target.closest(".row"); 
 $("#clear").innerHTML = ICON_X;
 $("#clear").onclick = () => { selectChannel(-1); S.selCl = -1; };
 $("#movers").addEventListener("click", e => { const r = e.target.closest(".row"); if (r) selectChannel(+r.dataset.ch); });
+$("#more").onclick = () => {
+  const o = $("#side").classList.toggle("open"); $("#more").setAttribute("aria-expanded", o); $("#more").textContent = o ? "Done" : "Options"; dirty = true;
+};
 addEventListener("keydown", e => {
   if (e.target.tagName === "INPUT") return;
   if (e.key === "/") { e.preventDefault(); $("#q").focus(); return; }
@@ -727,8 +852,11 @@ const monthYear = m => MONTH[m % 12] + " " + yOf(m);
 const pct = (x, d = 0) => (100 * x).toFixed(d) + "%";
 const short2 = m => MON[m % 12] + " " + yOf(m);
 const plural = (n, w) => n.toLocaleString() + " " + w + (n === 1 ? "" : "s");
-function flyTo(x, y, minZoom) { S.cx = x; S.cy = y; if (minZoom) S.s = Math.max(S.s, S.s0 * minZoom); dirty = true; }
-function onScreen(k) { const [sx, sy] = toScreen(X[k], Y[k]); return sx > 330 && sx < W - 350 && sy > 20 && sy < H - 140; }
+function flyTo(x, y, minZoom) {
+  const s = minZoom ? Math.max(S.s, S.s0 * minZoom) : S.s, [cx, cy] = centreFor(x, y, s); camTo(cx, cy, s);
+}
+function inFree(x, y) { const [sx, sy] = toScreen(x, y), [a, b, c, d] = freeArea(); return sx > a + 20 && sx < c - 20 && sy > b + 20 && sy < d - 20; }
+function onScreen(k) { return inFree(X[k], Y[k]); }
 async function api(path) {
   const r = await fetch(path);
   const j = await r.json().catch(() => ({error: "The search server isn't running. Start it with: uv run python serve.py"}));
@@ -739,7 +867,7 @@ function drawBar(cv, vec) {  // one stripe per number: orange = positive, blue =
   const w = Math.round(cv.clientWidth * DPR), h = Math.round(cv.clientHeight * DPR);
   cv.width = w; cv.height = h;
   const c = cv.getContext("2d"), n = vec.length;
-  c.fillStyle = "#0b0d11"; c.fillRect(0, 0, w, h);
+  c.fillStyle = "#000000"; c.fillRect(0, 0, w, h);
   for (let i = 0; i < n; i++) {
     const v = vec[i] / 127, a = Math.min(1, Math.pow(Math.abs(v) * 1.5, 0.75));
     c.fillStyle = v > 0 ? `rgba(255,150,70,${a})` : `rgba(100,150,255,${a})`;
@@ -807,9 +935,9 @@ function drawVec() {  // a ring on the open video, and on whichever neighbour th
   for (const [k, r] of [[S.vk, 10], [S.vhi, 7]]) {
     if (k < 0) continue;
     const [sx, sy] = toScreen(X[k], Y[k]);
-    ctx.globalAlpha = 1; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(8,10,14,.9)";
+    ctx.globalAlpha = 1; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(0,0,0,.9)";
     ctx.beginPath(); ctx.arc(sx, sy, r, 0, 7); ctx.stroke();
-    ctx.lineWidth = 2; ctx.strokeStyle = k === S.vk ? "#ffffff" : "#c9f5d6"; ctx.stroke();
+    ctx.lineWidth = 2; ctx.strokeStyle = k === S.vk ? "#ffffff" : "#ffffff"; ctx.stroke();
   }
 }
 
@@ -818,7 +946,7 @@ function openCluster(id) {
   if (S.info === "cl" && S.selCl === id) return closeInfo();
   const c = clusterById.get(id); if (!c) return;
   S.info = "cl"; S.vk = -1; S.vnn = null; S.selCl = id; dirty = true;
-  { const [sx, sy] = toScreen(c.x, c.y); if (sx < 330 || sx > W - 350 || sy < 20 || sy > H - 140) flyTo(c.x, c.y); }
+  if (!inFree(c.x, c.y)) flyTo(c.x, c.y);
   const y0 = yOf(mMin), y1 = yOf(mMax), ny = y1 - y0 + 1;
   const inY = new Float64Array(ny), totY = new Float64Array(ny), byCh = new Map();
   let n = 0, shorts = 0, hits = [], top = [];
@@ -842,10 +970,10 @@ function openCluster(id) {
   const top3 = chs.slice(0, 3).reduce((a, [, ms]) => a + ms.length, 0) / n;
   // one bar per year: its share of that year's uploads, the peak in green
   const bw = 288 / ny, chH = 56, mx = share[pk] || 1;
-  const bars = share.map((v, i) => `<rect x="${(i * bw + 1).toFixed(1)}" y="${(chH - v / mx * chH).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${(v / mx * chH).toFixed(1)}" rx="1.5" fill="${i === pk ? "#c9f5d6" : "#343c4a"}"/>`).join("");
+  const bars = share.map((v, i) => `<rect x="${(i * bw + 1).toFixed(1)}" y="${(chH - v / mx * chH).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${(v / mx * chH).toFixed(1)}" rx="1.5" fill="${i === pk ? "#ffffff" : "#333333"}"/>`).join("");
   const chart = `<svg width="100%" viewBox="0 0 288 ${chH + 16}" style="display:block;margin:8px 0 0" role="img" aria-label="Share of uploads by year, peaking in ${y0 + pk}">${bars}
-    <text x="0" y="${chH + 13}" fill="#6c7486" font-size="11" font-family="system-ui">${y0}</text><text x="288" y="${chH + 13}" fill="#6c7486" font-size="11" font-family="system-ui" text-anchor="end">${y1}</text>
-    <text x="${Math.min(262, Math.max(26, pk * bw + bw / 2))}" y="${chH + 13}" fill="#c9f5d6" font-size="11" font-family="system-ui" text-anchor="middle">${y0 + pk}</text></svg>`;
+    <text x="0" y="${chH + 13}" fill="#6e6e6e" font-size="11" font-family="system-ui">${y0}</text><text x="288" y="${chH + 13}" fill="#6e6e6e" font-size="11" font-family="system-ui" text-anchor="end">${y1}</text>
+    <text x="${Math.min(262, Math.max(26, pk * bw + bw / 2))}" y="${chH + 13}" fill="#ffffff" font-size="11" font-family="system-ui" text-anchor="middle">${y0 + pk}</text></svg>`;
   const story = lift >= 3 ? `It had a moment: in ${y0 + pk} it took ${lift.toFixed(1)} times its usual share of uploads.`
     : `It stayed fairly steady, peaking in ${y0 + pk} at ${lift.toFixed(1)} times its usual share.`;
   infoShow(`${xBtn("Close cluster")}<div class="title">${esc(c.name)}</div>
@@ -976,10 +1104,10 @@ async function runSearch(q) {
 }
 function drawQuery() {
   const [sx, sy] = toScreen(S.q.cx, S.q.cy);
-  ctx.globalAlpha = 1; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(8,10,14,.8)";
+  ctx.globalAlpha = 1; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(0,0,0,.8)";
   ctx.beginPath(); ctx.arc(sx, sy, 26, 0, 7); ctx.stroke(); ctx.lineWidth = 2; ctx.strokeStyle = "#ffffff"; ctx.stroke();
   const t = "“" + S.q.q + "”";
-  ctx.font = "700 14px ui-sans-serif,system-ui,-apple-system,sans-serif"; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(8,10,14,.9)";
+  ctx.font = "700 14px ui-sans-serif,system-ui,-apple-system,sans-serif"; ctx.lineWidth = 4; ctx.strokeStyle = "rgba(0,0,0,.9)";
   ctx.strokeText(t, sx, sy - 40); ctx.fillStyle = "#fff"; ctx.fillText(t, sx, sy - 40);
 }
 function drawQHist(c, w, h, padB, bw) {
@@ -987,8 +1115,8 @@ function drawQHist(c, w, h, padB, bw) {
   if (!mx) return;
   c.beginPath();
   for (let m = mMin; m <= mMax; m++) { const x = (m - mMin + 0.5) * bw, y = h - padB - 2 - (h - padB - 14) * sh[m] / mx; m === mMin ? c.moveTo(x, y) : c.lineTo(x, y); }
-  c.lineWidth = 4; c.strokeStyle = "rgba(8,10,14,.8)"; c.stroke(); c.lineWidth = 2; c.strokeStyle = "#fff"; c.stroke();
-  c.font = "600 12px ui-sans-serif,system-ui,-apple-system,sans-serif"; c.textAlign = "left"; c.lineWidth = 4; c.strokeStyle = "rgba(8,10,14,.9)";
+  c.lineWidth = 4; c.strokeStyle = "rgba(0,0,0,.8)"; c.stroke(); c.lineWidth = 2; c.strokeStyle = "#fff"; c.stroke();
+  c.font = "600 12px ui-sans-serif,system-ui,-apple-system,sans-serif"; c.textAlign = "left"; c.lineWidth = 4; c.strokeStyle = "rgba(0,0,0,.9)";
   const t = `“${S.q.q}” as a share of each month's uploads, up to ${pct(mx, 1)}`;
   c.strokeText(t, 6, 12); c.fillStyle = "#fff"; c.fillText(t, 6, 12); c.textAlign = "center";
 }
@@ -1000,7 +1128,7 @@ fetch("data/analysis.json").then(r => r.ok ? r.json() : null).then(j => ANA = j)
 function spark(v) {  // tiny per-year line
   const ok = v.filter(x => x != null), hi = Math.max(...ok), lo = Math.min(...ok), w = 90, h = 18;
   const p = v.map((x, i) => x == null ? null : `${(i / (v.length - 1) * w).toFixed(1)},${(h - 2 - (h - 4) * (x - lo) / Math.max(1e-9, hi - lo)).toFixed(1)}`).filter(Boolean).join(" ");
-  return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${p}" fill="none" stroke="#9cc3ff" stroke-width="1.5"/></svg>`;
+  return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${p}" fill="none" stroke="#bdbdbd" stroke-width="1.5"/></svg>`;
 }
 
 function anaHTML() {  // descriptive: what got made, what got watched, how thumbnails and lengths changed
@@ -1033,7 +1161,7 @@ function anaHTML() {  // descriptive: what got made, what got watched, how thumb
     </div>`;
 }
 
-const C1 = "#c9f5d6", C2 = "#9cc3ff", C3 = "#f0a35e";
+const C1 = "#ffffff", C2 = "#a3a3a3", C3 = "#5c5c5c";
 function chart(years, series, f, zero) {
   const w = 340, h = 120, l = 38, b = 18, vals = series.flatMap(s => s.v).filter(v => v != null);
   let lo = zero ? 0 : Math.min(...vals), hi = Math.max(...vals); if (hi === lo) hi = lo + 1;
@@ -1045,7 +1173,7 @@ function chart(years, series, f, zero) {
   const lab = [0, years.length >> 1, years.length - 1].map(i => `<text x="${X_(i)}" y="${h - 3}" text-anchor="${i ? i === years.length - 1 ? "end" : "middle" : "start"}">${years[i]}</text>`).join("");
   const key = series.length > 1 ? `<div class="key">${series.map(s => `<span><i style="background:${s.c}"></i>${s.n}</span>`).join("")}</div>` : "";
   return `<svg width="100%" viewBox="0 0 ${w} ${h}" role="img">
-    <line x1="${l}" x2="${w - 6}" y1="${Y_(lo)}" y2="${Y_(lo)}" stroke="#2c3340"/>
+    <line x1="${l}" x2="${w - 6}" y1="${Y_(lo)}" y2="${Y_(lo)}" stroke="#2b2b2b"/>
     <text x="${l - 6}" y="${Y_(hi) + 4}" text-anchor="end">${f(hi)}</text><text x="${l - 6}" y="${Y_(lo) + 4}" text-anchor="end">${f(lo)}</text>${lines}${lab}</svg>${key}`;
 }
 const fig = (title, text, svg) => `<figure><h4>${title}</h4><p>${text}</p>${svg}</figure>`;
@@ -1131,6 +1259,7 @@ function frame(now) {
       changed();
     }
   }
+  stepAnim(now);
   if (dirty) { dirty = false; drawGL(); drawOverlay(); }
   if (histDirty) { drawHist(); histDirty = false; }
   requestAnimationFrame(frame);
@@ -1147,10 +1276,11 @@ load().then(buf => {
   addEventListener("resize", () => { resize(); });
   resize();
   // the free area between the side panel (left, ~320px) and the cluster list (right, ~300px); labels need ~80px each side
-  const fx0 = 320 + 80, fx1 = W - 300 - 80;
-  S.s0 = S.s = 0.96 * Math.min((fx1 - fx0) / (x1 - x0), (H - 150 - 40) / (y1 - y0));
-  S.cx = (x0 + x1) / 2 - ((fx0 + fx1) / 2 - W / 2) / S.s; S.cy = (y0 + y1) / 2 - 50 / S.s;
-  $("#counts").textContent = `${meta.n.toLocaleString()} videos · ${meta.channels.length} channels · ${meta.clusters.length} clusters`;
+  const [a, b, c, d] = freeArea(), padX = W > 760 ? 70 : 10;
+  S.s0 = S.s = 0.96 * Math.min((c - a - 2 * padX) / (x1 - x0), (d - b - 30) / (y1 - y0));
+  [S.cx, S.cy] = centreFor((x0 + x1) / 2, (y0 + y1) / 2, S.s);
+  FIT = {x: (x0 + x1) / 2, y: (y0 + y1) / 2};
+  for (let k = 0; k < N; k++) if (!GAME[k]) NMC++;
   if (!hasViews) $("#countlab").style.display = $("#count").style.display = "none";
   stopPlay(); movers(); windowStats(); initSearch();
   document.fonts.ready.then(() => { dirty = true; histDirty = true; });

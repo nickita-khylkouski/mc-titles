@@ -3,7 +3,7 @@
   python map.py           full run: UMAP + HDBSCAN (slow), cached in data/map_state.npz, then --apply
   python map.py --apply   reuse the cached layout; just re-apply names/drops and rewrite web/data (seconds)
 
-Layout: UMAP (cosine) 512-d -> 2-d for the picture, and -> 8-d for HDBSCAN (clustering in the 2-d
+Layout: UMAP (cosine) 512-d -> 2-d for the picture (layout2), and -> 8-d for HDBSCAN (clustering in the 2-d
 picture mostly finds layout artefacts). Videos before May 2009 (pre-Minecraft uploads) are left out.
 
 Clusters:
@@ -42,10 +42,12 @@ NAMES = os.path.join(D, f"cluster_names{SFX}.json")
 REVIEW = os.path.join(D, f"clusters_review{SFX}.txt")
 sys.path.insert(0, ROOT)
 from classify import env  # noqa: E402
+import knn as K  # noqa: E402
 
 SAMPLE = int(os.environ.get("MAP_SAMPLE", 0))  # >0: random subset for quick tests
 FIRST_MONTH = (2009 - 2005) * 12 + 4           # May 2009, Minecraft's first public release
 SERIES_SHARE = 0.6
+MIN_SAMPLES = int(os.environ.get("MAP_MIN_SAMPLES", 10))
 MATCH = 0.9
 
 
@@ -80,14 +82,32 @@ def load():
     return channels, rows, X
 
 
-def layout(X):
+def chan_codes(rows):
+    return np.unique([r["cid"] for r in rows], return_inverse=True)[1]
+
+
+def layout2(X, nb, ch, seed=None):
+    """The 2-d picture. n_neighbors=30 squashed 500k videos into one ball (layout_test.py); 15 neighbours with more
+    repulsion and a PCA start spread it out, and taking 12 of them from other channels (knn.cross) lays it out by
+    topic, not by each channel's title template."""
+    import umap
+    ii, dd = K.cross(*nb, ch, other=12, same=2)
+    return umap.UMAP(n_neighbors=15, min_dist=0.0, negative_sample_rate=10, repulsion_strength=1.5, init="pca", metric="cosine",
+                     precomputed_knn=(ii, dd, None), random_state=seed, low_memory=True).fit_transform(X).astype(np.float32)
+
+
+def layout(X, key, ch):
     import hdbscan, umap
     seed = None if os.environ.get("MAP_FAST") else 42  # MAP_FAST=1: unseeded, so UMAP uses every core (box runs)
-    emb2 = umap.UMAP(n_neighbors=30, min_dist=0.05, metric="cosine", random_state=seed,
-                     low_memory=True).fit_transform(X).astype(np.float32)
-    emb8 = umap.UMAP(n_neighbors=30, min_dist=0.0, n_components=8, metric="cosine", random_state=seed,
-                     low_memory=True).fit_transform(X)
-    labels = hdbscan.HDBSCAN(min_cluster_size=max(30, len(X) // 1500), min_samples=10).fit_predict(emb8)
+    nb = K.graph(X, key)
+    emb2 = layout2(X, nb, ch, seed)
+    ii, dd = K.cross(*nb, ch, other=26, same=3)
+    emb8 = umap.UMAP(n_neighbors=30, min_dist=0.0, n_components=8, metric="cosine", precomputed_knn=(ii, dd, None),
+                     random_state=seed, low_memory=True).fit_transform(X)
+    labels = hdbscan.HDBSCAN(min_cluster_size=max(30, len(X) // 1500), min_samples=MIN_SAMPLES, core_dist_n_jobs=6).fit_predict(emb8)
+    raw = (labels < 0).mean()
+    labels = K.vote8(emb8, labels.astype(np.int32))
+    print(f"{labels.max() + 1} clusters; unclustered {raw:.1%} -> {(labels < 0).mean():.1%} after the 8-d vote", flush=True)
     return emb2, labels.astype(np.int32)
 
 
@@ -188,8 +208,15 @@ def write(channels, rows, X, emb2, labels):
     dropped = {k for k in ids if info[k].get("drop")}
     keep = np.flatnonzero(~np.isin(labels, list(dropped))) if dropped else np.arange(len(rows))
     print(f"dropping {len(rows) - len(keep):,} videos in {len(dropped)} off-topic clusters", flush=True)
+    # the neighbour graph, re-indexed to the kept videos (-1 = neighbour was dropped)
+    idx, sim = K.graph(X, np.array([r["cid"] + r["id"] for r in rows]))
+    other = K.cross(idx, sim, chan_codes(rows), other=16, same=0)[0][:, 1:]
+    inv = np.full(len(rows), -1, np.int64)
+    inv[keep] = np.arange(len(keep))
+    idx, other = inv[idx[keep]], inv[other[keep]]
     rows = [rows[i] for i in keep]
     emb2, labels = emb2[keep], labels[keep]
+    emb2, _ = K.tidy(emb2, idx, X[keep], chan_codes(rows))  # small islands and lone dots move beside their closest videos in the main map
     # full vectors in points.bin order, for serve.py (search by meaning, true nearest neighbours); not served raw
     np.save(os.path.join(D, f"vecs{SFX}.npy"), X[keep].astype(np.float16))
 
@@ -197,6 +224,9 @@ def write(channels, rows, X, emb2, labels):
     live = [k for k in ids if k not in dropped]
     remap = {k: i for i, k in enumerate(live)}
     labels = np.array([remap.get(int(l), -1) for l in labels], dtype=np.int16)
+    before = (labels < 0).mean()
+    labels = K.vote(labels, other).astype(np.int16)  # unclustered videos join the cluster their neighbours are in
+    print(f"unclustered {before:.1%} -> {(labels < 0).mean():.1%} after the neighbour vote", flush=True)
     clusters = []
     for k in live:
         idx = np.flatnonzero(labels == remap[k])
@@ -228,7 +258,7 @@ def write(channels, rows, X, emb2, labels):
         views.update((d["id"], d["views"]) for d in map(json.loads, open(p)))
     np.array([min(views.get(r["id"], 0), 2**32 - 1) for r in rows], dtype="<u4").tofile(os.path.join(OUT, "views.bin"))
     print(f"views for {sum(r['id'] in views for r in rows):,}/{len(rows):,} videos", flush=True)
-    islands = channel_islands(emb2, rec["ch"], cids, channels)
+    islands = channel_islands(emb2, rec["ch"], cids, channels, rec["pad"])
     print(f"{len(islands)} channel islands; non-Minecraft videos: {int((np.array([r.get('mc', 1.0) for r in rows]) < 0.3).sum()):,}", flush=True)
 
     paths = defaultdict(lambda: defaultdict(list))
@@ -249,24 +279,30 @@ def write(channels, rows, X, emb2, labels):
     print(f"wrote {OUT}: {len(rows):,} videos, {len(cids)} channels, {len(clusters)} clusters")
 
 
-def channel_islands(emb2, ch, cids, channels, k=30, min_n=120):
+def channel_islands(emb2, ch, cids, channels, game, k=30, min_n=120):
     """Where one channel is talking to itself: per video, the share of its k nearest map neighbours from the same
-    channel -> web/data/islands.bin (u8, 0-255). Channels with min_n+ videos over 50% get a label at their median."""
+    channel -> web/data/islands.bin (u8, 0-255). Channels with min_n+ videos over 50% get a label at their median;
+    mx/my place it among the island's Minecraft videos, for when other games are filtered out (no label: mx absent)."""
     from scipy.spatial import cKDTree
     _, nb = cKDTree(emb2).query(emb2, k=k + 1)
     same = (ch[nb[:, 1:]] == ch[:, None]).mean(1)
     np.round(same * 255).astype(np.uint8).tofile(os.path.join(OUT, "islands.bin"))
+
+    def centre(idx):  # the island's densest part: points near the median, so a channel with two islands labels the bigger one
+        med = np.median(emb2[idx], axis=0)
+        d = np.linalg.norm(emb2[idx] - med, axis=1)
+        return np.median(emb2[idx[d <= np.quantile(d, 0.5)]], axis=0)
     out = []
     for i in range(len(cids)):
         idx = np.flatnonzero((ch == i) & (same > 0.5))
         if len(idx) < min_n:
             continue
-        # the island's densest part: points near the median, so a channel with two islands labels the bigger one
-        med = np.median(emb2[idx], axis=0)
-        d = np.linalg.norm(emb2[idx] - med, axis=1)
-        core = idx[d <= np.quantile(d, 0.5)]
-        cx, cy = np.median(emb2[core], axis=0)
-        out.append({"ch": i, "name": channels[cids[i]]["name"], "n": int(len(idx)), "x": float(cx), "y": float(cy)})
+        cx, cy = centre(idx)
+        o = {"ch": i, "name": channels[cids[i]]["name"], "n": int(len(idx)), "x": float(cx), "y": float(cy)}
+        mc = idx[game[idx] == 0]
+        if len(mc) >= min_n:
+            o["mx"], o["my"] = map(float, centre(mc))
+        out.append(o)
     return sorted(out, key=lambda o: -o["n"])
 
 
@@ -279,7 +315,7 @@ def main():
         assert np.array_equal(st["key"], key), "videos changed since the last full run; run without --apply"
         emb2, labels = st["emb2"], st["labels"]
     else:
-        emb2, labels = layout(X)
+        emb2, labels = layout(X, key, chan_codes(rows))
         np.savez(STATE, emb2=emb2, labels=labels, key=key)
     write(channels, rows, X, emb2, labels)
 

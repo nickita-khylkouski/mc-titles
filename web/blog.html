@@ -240,7 +240,7 @@ Promise.all(["data/stats.json", "data/insights.json", "data/analysis.json", "dat
   const vs = Y.map(y => ev[y].share), [vY, vV] = peak(Y, vs);
   const sat = Y.map(y => F.weekday[y][5]), satRank = y => [...F.weekday[y]].sort((a, b) => b - a).indexOf(F.weekday[y][5]) + 1;
   const hero = S.keywords.Herobrine, [heY, heV] = peak(Y, hero);
-  const d100 = V.spread.find(t => t.id === 75), q100 = Math.max(...Object.values(d100.dots.reduce((q, o) => (q[Math.floor(o.m / 3)] = (q[Math.floor(o.m / 3)] || 0) + 1, q), {})));
+  const d100 = (V.spread.find(t => /^i survived 100 days/i.test(t.name)) || V.spread[0]), q100 = Math.max(...Object.values(d100.dots.reduce((q, o) => (q[Math.floor(o.m / 3)] = (q[Math.floor(o.m / 3)] || 0) + 1, q), {})));
   let sec = 0; const N = () => ++sec;
 
   $("#m").innerHTML = `
@@ -263,7 +263,7 @@ Promise.all(["data/stats.json", "data/insights.json", "data/analysis.json", "dat
   <figure><div class="ymap" id="ymap"><img id="ymimg" alt="The map with one year lit up"><div class="yr" id="ymyr"></div><div id="ymlb"></div></div>
     <div class="ctl"><button id="ymplay">Play</button><input type="range" id="ymr" min="${Y[0]}" max="${Y[Y.length - 1]}" value="${Y[0]}"></div>
     <figcaption>Grey is every video ever. Green is 12,000 random videos from one year. Labels are that year's biggest topics.</figcaption></figure>
-  <p>Here's the same thing as a chart: puzzle maps and Mindcrack, then Hunger Games, then Bed Wars and "UHC, but…", then 100 days, then whatever Shorts are doing.</p>
+  <p>Here's the same thing as a chart: puzzle maps and Mindcrack, then Hunger Games, then Hermitcraft, UHC and Bed Wars, then 100 days, then whatever Shorts are doing.</p>
   <figure>${heat(Y, S.river.topics)}<figcaption>Each year's three biggest topics. Each row is scaled to its own best year.</figcaption></figure>
 
   <h2><span class="n">${N()}</span>The average thumbnail</h2>

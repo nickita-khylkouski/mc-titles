@@ -86,7 +86,12 @@ for k, nm in names.items():
         out["map_labels"][int(k)] = {"name": nm, "x": round(float(np.median(gx[sel])) / S, 4), "y": round(float(np.median(gy[sel])) / S, 4)}
 
 # ---- how a trend spreads through channels
-TREND = [106, 102, 26, 75, 55, 153]  # Hunger Games, Bed Wars, Noob vs Pro, I Survived 100 Days as, Manhunt but, Lifesteal SMP
+# by name, not id: ids change whenever the map is reclustered. The biggest cluster whose name starts this way
+size = {c["id"]: c["size"] for c in meta["clusters"]}
+TREND = [max((k for k, nm in names.items() if nm.lower().startswith(p)), key=size.get, default=None)
+         for p in ("hunger games", "bed wars", "noob vs pro", "i survived 100 days", "manhunt", "lifesteal")]
+print("trend clusters", [names.get(k) for k in TREND])
+TREND = [k for k in TREND if k is not None]
 M0 = (2011 - 2005) * 12
 mt = np.bincount(r["m"][mc], minlength=(2027 - 2005) * 12).astype(float)
 spread = []
