@@ -2,6 +2,8 @@
 
 Every upload from the 523 biggest Minecraft YouTube channels, about 487,000 videos from 2009 to 2026, embedded and laid out as one zoomable map. Similar videos sit together, so the clusters are the topics: Hermitcraft, 100 Days, Bed Wars, redstone tutorials, cryptic Shorts titles, and about 200 more, all named by hand.
 
+**Try it: [nickita.org/mc](https://nickita.org/mc)**
+
 ![The title map, coloured by cluster](docs/map.jpg)
 
 There are three maps of the same videos, each built from a different embedding:
@@ -65,5 +67,7 @@ docs/          README images and GIFs (shots.py, compose.py, morph.py, sections.
 uv sync
 uv run python serve.py   # http://localhost:8395  (?map=rich, ?map=thumb)
 ```
+
+The public copy at nickita.org/mc has no server, so its search matches title words, and each video's 12 closest come from files written by `pipeline/static_nn.py`. `scripts/publish.sh` builds it.
 
 `web/` has everything the map needs: points, titles, clusters and the blog. Search and nearest-neighbour lookups also need the raw vectors in `data/`, which are not in the repo (about 1.7 GB). To rebuild them, put `YOUTUBE_API_KEY`, `OPENAI_API_KEY` and `GEMINI_API_KEY` in `.env` and run the pipeline above.

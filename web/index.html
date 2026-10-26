@@ -207,7 +207,7 @@ dl.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
     <b>Grey italic names</b> are channel islands. / search, Space play, Esc back.</p>
 </div>
 <ul id="sugg" role="listbox"></ul>
-<nav id="links"><button id="insbtn">How it works</button><a id="blogbtn" href="blog.html">Read the write-up</a></nav>
+<nav id="links"><button id="insbtn">How it works</button><a id="blogbtn" href="blog.html">Read the write-up</a><a href="https://github.com/nickita-khylkouski/mc-titles">GitHub</a></nav>
 
 <div id="hot" class="panel">
   <h2 id="hotk">Biggest clusters</h2>
@@ -844,6 +844,31 @@ function movers() {
 const xBtn = (label, extra = "") => `<button class="x ${extra}" data-act="close" aria-label="${label}">${ICON_X}</button>`;
 const openVideo = k => window.open((KIND[k] ? "https://www.youtube.com/shorts/" : "https://www.youtube.com/watch?v=") + ids[k], "_blank");
 const API_MAP = SRC || "title";
+// the public copy (nickita.org/mc) has no server: search matches title words, and each video's 12 closest
+// come from small precomputed files (pipeline/static_nn.py). ?static=1 tries that locally.
+const STATIC = !["localhost", "127.0.0.1"].includes(location.hostname) || new URLSearchParams(location.search).has("static");
+const NN_CHUNK = 2000, nnChunks = new Map();
+async function staticNN(k) {
+  const c = Math.floor(k / NN_CHUNK);
+  if (!nnChunks.has(c)) nnChunks.set(c, fetch(`${DATA}/nn/${c}.bin`).then(r => { if (!r.ok) throw new Error("This video's neighbours didn't load."); return r.arrayBuffer(); }));
+  let b; try { b = await nnChunks.get(c); } catch (e) { nnChunks.delete(c); throw e; }
+  const n = Math.min(NN_CHUNK, N - c * NN_CHUNK), o = k - c * NN_CHUNK;
+  const idx = [...new Uint32Array(b, o * 48, 12)], sim = [...new Uint8Array(b, n * 48 + o * 12, 12)].map(v => v / 255);
+  // how many of the 12 sit in the closest 1% of dots on the 2-d map
+  const d2 = j => (X[j] - X[k]) ** 2 + (Y[j] - Y[k]) ** 2, lim = idx.map(d2), rank = new Array(12).fill(0);
+  for (let j = 0; j < N; j++) { const d = d2(j); for (let a = 0; a < 12; a++) if (d < lim[a]) rank[a]++; }
+  return {idx, sim, near1: rank.filter(r => r < N / 100).length, dims: +DIMS_TXT};
+}
+function wordSearch(q) {  // every title with all the words in it, most watched first
+  const ws = q.toLowerCase().split(/\s+/).filter(Boolean), hit = [];
+  for (let k = 0; k < N; k++) {
+    if (GAME[k] && !S.games) continue;
+    const t = (titles[k] || "").toLowerCase();
+    if (ws.every(w => t.includes(w))) hit.push(k);
+  }
+  hit.sort((a, b) => VIEWS[b] - VIEWS[a]);
+  return {idx: hit.slice(0, 3000), total: hit.length, words: true};
+}
 const DIMS_TXT = {"": "512", rich: "512", thumb: "768"}[SRC];
 const MODEL_NAME = {"": "OpenAI text-embedding-3-small", rich: "OpenAI text-embedding-3-small", thumb: "Gemini Embedding 2"}[SRC];
 const READS = {"": "the title", rich: "the title and description", thumb: "the thumbnail"}[SRC];
@@ -904,7 +929,7 @@ async function showVec(k) {
   renderVec(k, null);
   try {
     let r = nnCache.get(k);
-    if (!r) { r = await api(`/api/nn?map=${API_MAP}&i=${k}`); nnCache.set(k, r); }
+    if (!r) { r = STATIC ? await staticNN(k) : await api(`/api/nn?map=${API_MAP}&i=${k}`); nnCache.set(k, r); }
     if (S.vk !== k) return;
     S.vnn = r; dirty = true; renderVec(k, r);
   } catch (err) { if (S.vk === k) renderVec(k, {error: err.message}); }
@@ -917,19 +942,19 @@ function renderVec(k, r) {
     ${cl ? `<p class="sub">in <button class="link" data-act="cl" data-v="${cl.id}">${esc(cl.name)}</button></p>` : ""}`;
   if (!r) return infoShow(h + `<p class="note" style="margin-top:12px">Finding its closest videos…</p>`);
   if (r.error) return infoShow(h + `<p class="note" style="margin-top:12px">${esc(r.error)}</p>`);
-  const real = r.vec.slice(0, 6).map(v => (v * r.scale / 127).toFixed(3).replace("-", "−"));
-  h += `<h3>Its vector: ${r.dims} numbers</h3>
+  const real = r.vec ? r.vec.slice(0, 6).map(v => (v * r.scale / 127).toFixed(3).replace("-", "−")) : null;
+  h += (!real ? `<p class="note" style="margin-top:12px">${MODEL_NAME} reads ${READS} and turns it into ${r.dims} numbers. These are the videos whose numbers are closest to this one's.</p>` : `<h3>Its vector: ${r.dims} numbers</h3>
     <canvas class="bc" data-bar="-1"></canvas>
     <div class="mono">[${real.join(", ")}, … ${r.dims - 6} more]</div>
     <p class="note">${MODEL_NAME} reads ${READS} and writes these ${r.dims} numbers. One stripe per number, <span style="color:#ff9646">orange</span> above zero, <span style="color:#6496ff">blue</span> below. Its closest videos have nearly the same stripes:</p>
-    ${r.nvec.map((v, j) => `<div class="nn" data-hov="${r.idx[j]}" data-act="vid" data-v="${r.idx[j]}"><span class="s">${r.sim[j].toFixed(2)}</span><canvas class="bc s" data-bar="${j}" style="flex:1;align-self:center"></canvas></div>`).join("")}
+    ${r.nvec.map((v, j) => `<div class="nn" data-hov="${r.idx[j]}" data-act="vid" data-v="${r.idx[j]}"><span class="s">${r.sim[j].toFixed(2)}</span><canvas class="bc s" data-bar="${j}" style="flex:1;align-self:center"></canvas></div>`).join("")}`) + `
     <h3>12 closest in all ${r.dims} dimensions</h3>
     <p class="note"><b style="color:var(--ink)">${r.near1}/12</b> landed right beside it on the 2-d map (across all videos: ${INS ? pct(INS.honesty.near1) : "82%"}). The rest got pushed away when ${r.dims} numbers were squeezed into 2.</p>
     ${r.idx.map((j, n) => `<div class="nn" data-hov="${j}" data-act="vid" data-v="${j}"><span class="s">${r.sim[n].toFixed(2)}</span>
       <span class="t" title="${esc(titles[j] || "")}">${esc(titles[j] || "")} <span class="c">${esc(meta.channels[CH[j]].name)}</span></span></div>`).join("")}
     <div class="acts"><button class="act" data-act="ch" data-v="${CH[k]}">Follow ${esc(ch.name)}</button><button class="act go" data-act="open" data-v="${k}">Watch ${ICON_OUT}</button></div>`;
   infoShow(h);
-  $("#info").querySelectorAll("canvas[data-bar]").forEach(cv => { const j = +cv.dataset.bar; drawBar(cv, j < 0 ? r.vec : r.nvec[j]); });
+  if (real) $("#info").querySelectorAll("canvas[data-bar]").forEach(cv => { const j = +cv.dataset.bar; drawBar(cv, j < 0 ? r.vec : r.nvec[j]); });
 }
 function drawVec() {  // a ring on the open video, and on whichever neighbour the pointer is over in the card
   for (const [k, r] of [[S.vk, 10], [S.vhi, 7]]) {
@@ -1067,11 +1092,12 @@ async function runSearch(q) {
   box.style.display = "block";
   box.innerHTML = `<p class="note" style="margin:0">Reading “${esc(q)}”…</p>`;
   let r;
-  try { r = await api(`/api/search?map=${API_MAP}&q=${encodeURIComponent(q)}`); }
+  try { r = STATIC ? wordSearch(q) : await api(`/api/search?map=${API_MAP}&q=${encodeURIComponent(q)}`); }
   catch (err) { if (seq === qSeq) box.innerHTML = `${xBtn("Clear search")}<p class="note" style="margin:0">${esc(err.message)}</p>`; return; }
   if (seq !== qSeq) return;
-  const lo = r.sim[r.sim.length - 1], hi = r.sim[0];
-  QB.fill(0); r.idx.forEach((k, i) => QB[k] = 0.08 + 0.92 * (r.sim[i] - lo) / Math.max(1e-6, hi - lo));
+  if (!r.idx.length) { box.innerHTML = `${xBtn("Clear search")}<p class="note" style="margin:0">No titles have “${esc(q)}” in them.</p>`; S.q = null; QB.fill(0); gl.bindBuffer(gl.ARRAY_BUFFER, qbuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, QB); dirty = true; histDirty = true; return; }
+  const lo = r.words ? 0 : r.sim[r.sim.length - 1], hi = r.words ? 1 : r.sim[0];
+  QB.fill(0); r.idx.forEach((k, i) => QB[k] = r.words ? 1 : 0.08 + 0.92 * (r.sim[i] - lo) / Math.max(1e-6, hi - lo));
   gl.bindBuffer(gl.ARRAY_BUFFER, qbuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, QB);
   // where it lands, and its share of each month's uploads
   // (centred on the densest bunch of the top 200, so matches split across places don't put the ring in between)
@@ -1094,7 +1120,13 @@ async function runSearch(q) {
   const cls = [...cl].sort((a, b) => b[1] - a[1]).slice(0, 3);
   S.q = {q, r, cx: wx / ws, cy: wy / ws, share, peakY};
   flyTo(S.q.cx, S.q.cy, 1.6);
-  box.innerHTML = `${xBtn("Clear search")}<div class="title" style="font-size:14px">Videos about “${esc(q)}”</div>
+  if (r.words) box.innerHTML = `${xBtn("Clear search")}<div class="title" style="font-size:14px">Titles with “${esc(q)}”</div>
+    <p class="note">${r.total.toLocaleString()} titles say it${r.total > 3000 ? "; the 3,000 most watched are lit" : ", all lit on the map"}. They were most common in ${peakY}. (This public copy matches words. Run it locally to search by meaning.)</p>
+    <h3 style="margin-top:12px">Mostly in</h3>
+    ${cls.map(([id, c]) => `<div class="row" data-act="cl" data-v="${id}"><span class="n">${esc(clusterById.get(id).name)}</span><span class="v">${pct(c / Math.min(300, r.idx.length))}</span></div>`).join("")}
+    <h3>Most watched</h3>
+    ${r.idx.slice(0, 6).map(k => `<div class="nn" data-act="vid" data-v="${k}"><span class="s">${fmt(VIEWS[k])}</span><span class="t" title="${esc(titles[k] || "")}">${esc(titles[k] || "")}</span></div>`).join("")}`;
+  else box.innerHTML = `${xBtn("Clear search")}<div class="title" style="font-size:14px">Videos about “${esc(q)}”</div>
     <p class="note">The 3,000 closest are lit on the map. They were most common in ${peakY}. The best match scores ${hi.toFixed(2)}, a typical video ${r.median.toFixed(2)}.</p>
     <h3 style="margin-top:12px">Mostly in</h3>
     ${cls.map(([id, c]) => `<div class="row" data-act="cl" data-v="${id}"><span class="n">${esc(clusterById.get(id).name)}</span><span class="v">${pct(c / 300)}</span></div>`).join("")}
@@ -1237,6 +1269,7 @@ $("#insbtn").onclick = () => {
   P.querySelector(".x").onclick = () => P.style.display = "none";
   const bar = $("#insbar");
   if (S.vnn && S.vk === sample) drawBar(bar, S.vnn.vec);
+  else if (STATIC) bar.remove();
   else api(`/api/nn?map=${API_MAP}&i=${sample}`).then(r => { nnCache.set(sample, r); drawBar(bar, r.vec); }).catch(() => bar.remove());
   P.querySelectorAll(".cl").forEach(el => el.onclick = () => {
     if (SRC) return;  // topic ids are the title map's clusters
